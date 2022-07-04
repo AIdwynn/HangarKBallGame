@@ -19,12 +19,13 @@ public class Gameloop : MonoBehaviour
         _audioManager = new AudioManager(bpm, _beepSound, _boopSound, _auidioSource);
         foreach (var ballSpawner in _ballSpawners)
         {
-            ballSpawner.BallSpawned += (s, e) => AssignSource(e);
+            ballSpawner.BallSpawned += (s, e) => AssignSource(e.Ball);
         }
     }
-    private void AssignSource(Ball ball)
+    private void AssignSource(GameObject ball)
     {
-        ball.AudioManager = _audioManager;
+        ball.AddComponent<ColorChangeScript>();
+        ball.GetComponent<ColorChangeScript>().AudioManager = _audioManager;
     }
 
     private void FixedUpdate()
