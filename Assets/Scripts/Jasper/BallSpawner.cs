@@ -1,9 +1,17 @@
 using System;
 using UnityEngine;
 
+public class BallEventArgs : EventArgs
+{
+    public GameObject Ball;
+
+    public BallEventArgs(GameObject ball)
+    {
+        Ball = ball;
+    }
+}
 public class BallSpawner : MonoBehaviour
 {
-    internal System.Func<object, object, object> BallSpawned;
     [SerializeField]
     private GameObject _ball;
 
@@ -13,7 +21,7 @@ public class BallSpawner : MonoBehaviour
     [SerializeField]
     private float _timeToSpawnBall;
 
-    private event EventHandler BallSpawned;
+    public event EventHandler<BallEventArgs> BallSpawned;
 
     private float _timer;
 
@@ -24,11 +32,12 @@ public class BallSpawner : MonoBehaviour
         if (_timer >= _timeToSpawnBall)
         {
             _timer = 0;
-            Instantiate(_ball, _ballTransformSpawnPoint);
+            var ball = Instantiate(_ball, _ballTransformSpawnPoint);
+            OnBallSpawmed(this, new BallEventArgs(ball));
         }
     }
 
-    public void OnBallSpawmed(object source, EventArgs eventArgs)
+    public void OnBallSpawmed(object source, BallEventArgs eventArgs)
     {
         var handler = BallSpawned;
         handler?.Invoke(this, eventArgs);

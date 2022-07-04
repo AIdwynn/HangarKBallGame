@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private LayerMask _reflectLayer;
 
- //   public AudioManager _audioManager;
+    public AudioManager _audioManager;
 
     private Vector2 _lastVelocity;
 
