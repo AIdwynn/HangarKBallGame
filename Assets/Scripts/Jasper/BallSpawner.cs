@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BallSpawner : MonoBehaviour
 {
+    internal System.Func<object, object, object> BallSpawned;
     [SerializeField]
     private GameObject _ball;
 
