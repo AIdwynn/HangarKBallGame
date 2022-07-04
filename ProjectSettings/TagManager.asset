@@ -41,3 +41,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Backplate
+    uniqueID: 2909532147
+    locked: 0
+  - name: Background
+    uniqueID: 1983393891
+    locked: 0
+  - name: BackgroundOutline
+    uniqueID: 3550669323
+    locked: 0
+  - name: LevelBack
+    uniqueID: 3752122571
+    locked: 0
+  - name: LevelMid
+    uniqueID: 4096616069
+    locked: 0
+  - name: LevelFront
+    uniqueID: 3123869981
+    locked: 0
+  - name: ForeGround
+    uniqueID: 1348348831
+    locked: 0
