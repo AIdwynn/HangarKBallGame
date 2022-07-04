@@ -24,6 +24,7 @@ public class Gameloop : MonoBehaviour
     }
     private void AssignSource(GameObject ball)
     {
+        _audioManager.IsBall = true;
         ball.AddComponent<ColorChangeScript>();
         ball.GetComponent<ColorChangeScript>().AudioManager = _audioManager;
     }

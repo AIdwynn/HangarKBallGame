@@ -18,6 +18,7 @@ public class AudioManager
     private AudioClip _boopSound;
     private AudioSource _musicSource;
     public EventHandler<BoopEventargs> boopHandler;
+    public bool IsBall;
     private float _counter;
 
     public AudioManager(int bPM, AudioClip beepSound, AudioClip boopSound, AudioSource musicSource)
@@ -41,7 +42,8 @@ public class AudioManager
         {
             _musicSource.clip = _boopSound;
             _musicSource.Play();
-            //ThrowBoopEvent();
+            if(IsBall)
+                ThrowBoopEvent();
             _boopCounter = 0;
         }
         else

@@ -380,10 +380,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3cade39b71636f42afc3edc43de2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 50
+  bpm: 40
   _beepSound: {fileID: 8300000, guid: 7a99e5b699aedc24d853b38c47343c70, type: 3}
   _boopSound: {fileID: 8300000, guid: f5fea557f7da2ce4cb5754cbd0009063, type: 3}
   _auidioSource: {fileID: 1304881616}
+  _ballSpawners: []
 --- !u!1 &1964248829
 GameObject:
   m_ObjectHideFlags: 0
