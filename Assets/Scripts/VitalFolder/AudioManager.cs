@@ -4,34 +4,43 @@ using UnityEngine;
 using DAE.Gamesystem.Singleton;
 using System;
 
-public class BoopEventargs : EventArgs
-{
-
-}
-
 public class AudioManager
 {
     private int _boopCounter;
     private int _boopMoment = 3;
     private int _bPM;
+    private AudioClip _song;
     private AudioClip _beepSound;
     private AudioClip _boopSound;
+    private AudioSource _boopSource;
     private AudioSource _musicSource;
-    public EventHandler<BoopEventargs> boopHandler;
-    public bool IsBall;
+    public EventHandler boopHandler;
+    public bool IsBall = true;
     private float _counter;
 
-    public AudioManager(int bPM, AudioClip beepSound, AudioClip boopSound, AudioSource musicSource)
+    public AudioManager(AudioClip beepSound, AudioClip boopSound, AudioSource boopSource, SongNames _songName, MusicData musicData, AudioSource musicSource)
     {
-        _bPM = bPM;
         _beepSound = beepSound;
         _boopSound = boopSound;
+        _boopSource = boopSource;
         _musicSource = musicSource;
+
+        foreach (var item in musicData.songs)
+        {
+            if (item.names == _songName)
+            {
+                _bPM = item.bpm;
+                _song = item.song;
+            }
+        }
+        _musicSource.loop = true;
+        _musicSource.Play();
+
     }
 
     public void FixedUpdate()
     {
-        var timeBetweenSounds = 60 / ((float)_bPM * (_boopMoment+1));
+        var timeBetweenSounds = 60 / ((float)_bPM);
         _counter += Time.fixedDeltaTime;
         if (timeBetweenSounds < _counter) { PlayNextSound(); _counter = 0; }
     }
@@ -40,16 +49,16 @@ public class AudioManager
     {
         if (_boopCounter == _boopMoment)
         {
-            _musicSource.clip = _boopSound;
-            _musicSource.Play();
+            _boopSource.clip = _boopSound;
+            _boopSource.Play();
             if(IsBall)
                 ThrowBoopEvent();
             _boopCounter = 0;
         }
         else
         {
-            _musicSource.clip = _beepSound;
-            _musicSource.Play();
+            _boopSource.clip = _beepSound;
+            _boopSource.Play();
             _boopCounter++;
         }
 
@@ -58,6 +67,6 @@ public class AudioManager
     private void ThrowBoopEvent()
     {
         var handler = boopHandler;
-        handler.Invoke(this, new BoopEventargs());
+        handler.Invoke(this, new EventArgs());
     }
 }
