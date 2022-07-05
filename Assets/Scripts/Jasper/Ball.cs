@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -8,11 +7,9 @@ public class Ball : MonoBehaviour
 
     public float _ballSpeed;
 
-    [SerializeField]
-    private LayerMask _playerLayer;
 
-    [SerializeField]
-    private LayerMask _reflectLayer;
+
+
 
     public AudioManager _audioManager;
 
@@ -36,20 +33,21 @@ public class Ball : MonoBehaviour
         _rb.AddForce(_direction * _ballSpeed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void ReflectBall(Collision2D collision)
     {
-        if (((1 << collision.gameObject.layer) & _playerLayer) != 0)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        if (((1 << collision.gameObject.layer) & _reflectLayer) != 0)
-        {
-            var mult = _lastVelocity.magnitude;
-            var inDirection = _lastVelocity.normalized;
+        ContactPoint2D cp = collision.contacts[0];
+        _lastVelocity = Vector3.Reflect(_lastVelocity, cp.normal);
+        _rb.velocity = _lastVelocity;
 
-            _rb.velocity = Vector2.Reflect(inDirection, collision.contacts[0].normal.normalized);
-        }
+        /*
+                var mult = _lastVelocity.magnitude;
+                var inDirection = _lastVelocity.normalized;
+
+                if (mult < 25)
+                    _rb.velocity = Vector2.Reflect(inDirection, collision.contacts[0].normal.normalized) * (25 * 1.4f);*/
     }
+
+
 
 
 
