@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleObjectPool : SingletonMonoBehaviour<ParticleObjectPool>
+public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
 {
     //[Header("animation")]
     //[SerializeField] private ParticleSystem _directionalParticles, _constantParticles, _spreadingPArticles;

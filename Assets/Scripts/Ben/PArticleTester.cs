@@ -33,6 +33,7 @@ public class ParticleTester : MonoBehaviour
                                .Activate(secondlocation);
 
 
+
             timer = 0;
         }
 

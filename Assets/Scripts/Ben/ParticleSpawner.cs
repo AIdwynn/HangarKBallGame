@@ -10,8 +10,8 @@ public class ParticleSpawner
 
     public ParticleSpawner(ParticleDirection particleType, ParticleShape particleShape)
     {
-        _currentSystem = ParticleObjectPool.Instance.GetParticleSystem(particleType);
-        ParticleObjectPool.Instance.SetMaterial(_currentSystem, particleShape);
+        _currentSystem = ParticleManager.Instance.GetParticleSystem(particleType);
+        ParticleManager.Instance.SetMaterial(_currentSystem, particleShape);
         _particleType = particleType;
     }
 
@@ -19,10 +19,10 @@ public class ParticleSpawner
     {
         if (_particleType == ParticleDirection.Constant)
         {
-            ParticleObjectPool.Instance.PlayConstantParticleSystem(_currentSystem, PlayLocation);
+            ParticleManager.Instance.PlayConstantParticleSystem(_currentSystem, PlayLocation);
             return this;
         }
-        ParticleObjectPool.Instance.PlayOneShotParticleSystem(_currentSystem, PlayLocation);
+        ParticleManager.Instance.PlayOneShotParticleSystem(_currentSystem, PlayLocation);
 
         return this;
     }
@@ -30,49 +30,49 @@ public class ParticleSpawner
     public ParticleSpawner StopConstantAfterSeconds(float time)
     {
         
-        ParticleObjectPool.Instance.StopConstantParticleSystemAfterSeconds(_currentSystem, time);
+        ParticleManager.Instance.StopConstantParticleSystemAfterSeconds(_currentSystem, time);
 
         return this;
     }   
 
     public ParticleSpawner StopConstant()
     {
-        ParticleObjectPool.Instance.StopConstantParticleSystem(_currentSystem);
+        ParticleManager.Instance.StopConstantParticleSystem(_currentSystem);
 
         return this;
     }
 
     public ParticleSpawner SetParticleColourBasedOnObject(Transform objectToChangeColourToo)
     {
-        ParticleObjectPool.Instance.SetParticleColourBasedOnCollision(_currentSystem, objectToChangeColourToo);
+        ParticleManager.Instance.SetParticleColourBasedOnCollision(_currentSystem, objectToChangeColourToo);
 
         return this;
     }
 
     public ParticleSpawner SetColour(Color color1, Color color2)
     {
-        ParticleObjectPool.Instance.SetColor(_currentSystem, color1, color2);
+        ParticleManager.Instance.SetColor(_currentSystem, color1, color2);
 
         return this;
     }
 
     public ParticleSpawner Rotate(float Zrotation)
     {
-        ParticleObjectPool.Instance.RotateParticleSystemZ(_currentSystem, Zrotation);
+        ParticleManager.Instance.RotateParticleSystemZ(_currentSystem, Zrotation);
 
         return this;
     }
 
     public ParticleSpawner ChangeSpeed(float minSpeed, float maxSpeed)
     {
-        ParticleObjectPool.Instance.SetDirectionalParticleSpeed(_currentSystem, minSpeed, maxSpeed);
+        ParticleManager.Instance.SetDirectionalParticleSpeed(_currentSystem, minSpeed, maxSpeed);
 
         return this;
     }
 
     public ParticleSpawner ChangeSize(float minSize, float maxSzie)
     {
-        ParticleObjectPool.Instance.SetDirectionalParticleSize(_currentSystem, minSize, maxSzie);
+        ParticleManager.Instance.SetDirectionalParticleSize(_currentSystem, minSize, maxSzie);
 
         return this;
     }
