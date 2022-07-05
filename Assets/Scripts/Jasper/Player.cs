@@ -21,6 +21,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _reflector;
 
+    public bool _TESTSLOW;
+
+
+
     private void Start()
     {
         _playerInput = new PlayerInputControls();
@@ -30,13 +34,38 @@ public class Player : MonoBehaviour
 
         _playerInput.PlayerActionMap.Movement.performed += MovementListener;
         _playerInput.PlayerActionMap.Movement.canceled += MovementCanceled;
+        _playerInput.PlayerActionMap.Aim.performed += AimListener;
+        //   _playerInput.PlayerActionMap.Aim.canceled += AimCanceled;
+
+
         Rumbler.Instance.RumblePulse(0.5f, 1f, 20, 2);
 
     }
-    private void FixedUpdate()
+    private void Update()
     {
-        MovePlayer();
+        /* if (_TESTSLOW)
+         {
+             TimeManager.ChangeTime();
 
+             _TESTSLOW = false;
+         }*/
+        TimeChange();
+        MovePlayer();
+        RotateReflector();
+
+        Debug.Log(TimeManager.TimeScaling.global);
+    }
+
+    private void TimeChange()
+    {
+        if (_rb.velocity != Vector2.zero)
+        {
+            TimeManager.SlowDownTime();
+        }
+        else
+        {
+            TimeManager.OriginalTime();
+        }
     }
 
     private void MovementListener(CallbackContext callbackContext)
@@ -51,19 +80,42 @@ public class Player : MonoBehaviour
     {
         _aimInputVector = callbackContext.ReadValue<Vector2>();
     }
+    private void AimCanceled(CallbackContext callbackContext)
+    {
+        _aimInputVector = Vector2.zero;
+    }
+
     private void MovePlayer()
     {
 
         if (_inputVal.x != 0 || _inputVal.y != 0)
-            _rb.AddForce(new Vector2(_inputVal.x, _inputVal.y) * _speed * Time.deltaTime);
+            _rb.AddForce(new Vector2(_inputVal.x, _inputVal.y) * Time.deltaTime * _speed * 1 / Time.timeScale);
     }
 
     private void RotateReflector()
     {
-        Vector3 aim = new Vector3(_aimInputVector.x, 0, -_aimInputVector.y);
+        float angleDirection;
+        float startAngle;
+
+        Vector2 aim = new Vector2(_aimInputVector.x, _aimInputVector.y);
         aim.Normalize();
         aim /= _reflectorDistance;
         _reflector.transform.localPosition = aim;
+
+
+        Vector2 mp = Camera.main.ScreenToWorldPoint(aim);
+
+        Vector2 dir = mp - (Vector2)transform.position;
+
+        angleDirection = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        startAngle = 360 + angleDirection;
+
+        float angle = Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg - 360;
+
+        _reflector.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
     }
+
 
 }

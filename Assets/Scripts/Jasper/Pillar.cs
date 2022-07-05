@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Reflector : MonoBehaviour
+public class Pillar : MonoBehaviour
 {
     [SerializeField]
     private LayerMask _ballLayer;
@@ -9,7 +10,8 @@ public class Reflector : MonoBehaviour
     {
         if (((1 << collision.gameObject.layer) & _ballLayer) != 0)
         {
-            collision.gameObject.GetComponent<Ball>().ReflectBall(collision);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
         }
     }
 }

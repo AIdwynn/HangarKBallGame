@@ -27,7 +27,7 @@ public class BallSpawner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _timer += Time.deltaTime;
+        _timer += Time.deltaTime / TimeManager.TimeScaling.global;
 
         if (_timer >= _timeToSpawnBall)
         {
