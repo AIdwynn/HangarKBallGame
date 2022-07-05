@@ -18,16 +18,17 @@ public class ParticleTester : MonoBehaviour
         if (timer >= 2)
         {
 
-            new ParticleSpawner(ParticleType.Directional)
+            new ParticleSpawner(ParticleDirection.Directional, ParticleShape.Trigangles)
                           .ChangeSpeed(2f, 2.6f)
-                          .ChangeSize(0.1f, 0.6f)
-                          .SetColour(Color.black)
+                          .ChangeSize(0.7f, 1.5f)
+                          .SetColour(Color.blue, Color.cyan)
                           .Rotate(Random.Range(0, 360))
                           .Activate(transform);
 
-            new ParticleSpawner(ParticleType.Directional)
+            new ParticleSpawner(ParticleDirection.Directional, ParticleShape.Squares)
                                .ChangeSpeed(1f, 1.5f)
-                               .ChangeSize(0.5f, 1f)
+                               .ChangeSize(0.8f, 1f)
+                               .SetColour(Color.red, Color.yellow)
                                .Rotate(Random.Range(0, 360))
                                .Activate(secondlocation);
 

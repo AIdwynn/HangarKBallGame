@@ -6,17 +6,18 @@ public class ParticleSpawner
 {
 
     private ParticleSystem _currentSystem;
-    private ParticleType _particleType;
+    private ParticleDirection _particleType;
 
-    public ParticleSpawner(ParticleType particleType)
+    public ParticleSpawner(ParticleDirection particleType, ParticleShape particleShape)
     {
         _currentSystem = ParticleObjectPool.Instance.GetParticleSystem(particleType);
+        ParticleObjectPool.Instance.SetMaterial(_currentSystem, particleShape);
         _particleType = particleType;
     }
 
     public ParticleSpawner Activate(Transform PlayLocation)
     {
-        if (_particleType == ParticleType.Constant)
+        if (_particleType == ParticleDirection.Constant)
         {
             ParticleObjectPool.Instance.PlayConstantParticleSystem(_currentSystem, PlayLocation);
             return this;
@@ -48,9 +49,9 @@ public class ParticleSpawner
         return this;
     }
 
-    public ParticleSpawner SetColour(Color color)
+    public ParticleSpawner SetColour(Color color1, Color color2)
     {
-        ParticleObjectPool.Instance.SetColor(_currentSystem, color);
+        ParticleObjectPool.Instance.SetColor(_currentSystem, color1, color2);
 
         return this;
     }

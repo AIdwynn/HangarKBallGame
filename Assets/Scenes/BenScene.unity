@@ -3477,6 +3477,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd959d0e2320f547bf1a5283b6ff52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SmokeClouds: {fileID: 2100000, guid: 1e76549cd0d65fc4d8104fa1f501bf04, type: 2}
+  cubes: {fileID: 2100000, guid: 06c859ce5258d204aa4020bc0e4715d9, type: 2}
+  triangles: {fileID: 2100000, guid: 967363854b5fcd94db2217638941e4ea, type: 2}
   _directionalParticleObject: {fileID: 3051131230090951623, guid: d7b888e17e65f1941a797d2530977b96, type: 3}
   _constantParticleObject: {fileID: 4323297058726936209, guid: ad71bed4d37357a4397c69b356a7c72a, type: 3}
   _spreadingPArticleObject: {fileID: 6355677860888108965, guid: 7489ec506bfc8ae41b6631efc0315222, type: 3}
@@ -4946,7 +4949,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 791602326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.81, y: -0.7, z: 1.84}
+  m_LocalPosition: {x: 4.88, y: 0.89, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3344720}
@@ -6889,7 +6892,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1011584710
 Transform:
   m_ObjectHideFlags: 0
@@ -7014,7 +7017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1089166112
 Transform:
   m_ObjectHideFlags: 0
