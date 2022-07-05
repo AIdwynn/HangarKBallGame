@@ -6,7 +6,6 @@ public class Gameloop : MonoBehaviour
 {
     private AudioManager _audioManager;
     [SerializeField] private List<Color> _colors;
-    [SerializeField] private ColorChangeScript ccs;
 
 
     [SerializeField] private AudioClip _beepSound;
@@ -21,8 +20,6 @@ public class Gameloop : MonoBehaviour
     private void Awake()
     {
         _audioManager = new AudioManager(_beepSound, _boopSound, _auidioSource, _songName, _musicData, _musicSource);
-        ccs.AudioManager = _audioManager;
-        ccs.Colors = _colors;
     }
     void Start()
     {
@@ -34,9 +31,12 @@ public class Gameloop : MonoBehaviour
     private void AssignSource(GameObject ball)
     {
         _audioManager.IsBall = true;
+        
         var script = ball.AddComponent<ColorChangeScript>();
         script.AudioManager = _audioManager;
         script.Colors = _colors;
+        var script2 = ball.GetComponent<Ball>();
+        script2.BallBounced += (s,e) => { _audioManager.SpeedIncrease(); };
     }
 
     private void FixedUpdate()

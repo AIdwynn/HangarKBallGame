@@ -15,7 +15,7 @@ public class AudioManager
     private AudioSource _boopSource;
     private AudioSource _musicSource;
     public EventHandler boopHandler;
-    public bool IsBall = true;
+    public bool IsBall = false;
     private float _counter;
 
     public AudioManager(AudioClip beepSound, AudioClip boopSound, AudioSource boopSource, SongNames _songName, MusicData musicData, AudioSource musicSource)
@@ -68,5 +68,10 @@ public class AudioManager
     {
         var handler = boopHandler;
         handler.Invoke(this, new EventArgs());
+    }
+
+    public void SpeedIncrease()
+    {
+        _musicSource.pitch += 0.05f;
     }
 }
