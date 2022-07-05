@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa14de90dcfa4043989bb5b648b1036, type: 3}
+  m_Name: MusicData
+  m_EditorClassIdentifier: 
+  songs:
+  - names: 0
+    song: {fileID: 8300000, guid: 1a88e11361ef2ff4ab0f9f7b387192be, type: 3}
+    bpm: 117
+  - names: 1
+    song: {fileID: 8300000, guid: 36c7217c4201e4545875211b1a7a4522, type: 3}
+    bpm: 99
+  - names: 2
+    song: {fileID: 8300000, guid: ac188902b0eb9d54295a57f3a5b6cf2d, type: 3}
+    bpm: 92
+  - names: 3
+    song: {fileID: 8300000, guid: 3737e38d85843794397b01dbe6b46aa8, type: 3}
+    bpm: 123
+  - names: 4
+    song: {fileID: 8300000, guid: 22e9912fb397b0942b01f051c676ccbd, type: 3}
+    bpm: 108
+  - names: 5
+    song: {fileID: 8300000, guid: 79617f853c421fc42a8ef9b1b3ece992, type: 3}
+    bpm: 117
+  - names: 6
+    song: {fileID: 8300000, guid: 175d4c9d33d7a794c8bffb07b666d38e, type: 3}
+    bpm: 112
+  - names: 7
+    song: {fileID: 8300000, guid: ef6fbcb2943cfe548ac06b0ddad9b411, type: 3}
+    bpm: 99
+  - names: 8
+    song: {fileID: 8300000, guid: 52a237b37a8e7954995b942e0248c99d, type: 3}
+    bpm: 70

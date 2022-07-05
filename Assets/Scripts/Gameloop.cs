@@ -5,18 +5,27 @@ using UnityEngine;
 public class Gameloop : MonoBehaviour
 {
     private AudioManager _audioManager;
+    [SerializeField] private List<Color> _colors;
+    [SerializeField] private ColorChangeScript ccs;
 
-    [SerializeField] private int bpm;
+
     [SerializeField] private AudioClip _beepSound;
     [SerializeField] private AudioClip _boopSound;
     [SerializeField] private AudioSource _auidioSource;
+    [SerializeField] private SongNames _songName;
+    [SerializeField] private MusicData _musicData;
+    [SerializeField] private AudioSource _musicSource;
 
     [SerializeField] private List<BallSpawner> _ballSpawners;
 
-
+    private void Awake()
+    {
+        _audioManager = new AudioManager(_beepSound, _boopSound, _auidioSource, _songName, _musicData, _musicSource);
+        ccs.AudioManager = _audioManager;
+        ccs.Colors = _colors;
+    }
     void Start()
     {
-        _audioManager = new AudioManager(bpm, _beepSound, _boopSound, _auidioSource);
         foreach (var ballSpawner in _ballSpawners)
         {
             ballSpawner.BallSpawned += (s, e) => AssignSource(e.Ball);
@@ -24,8 +33,10 @@ public class Gameloop : MonoBehaviour
     }
     private void AssignSource(GameObject ball)
     {
-        ball.AddComponent<ColorChangeScript>();
-        ball.GetComponent<ColorChangeScript>().AudioManager = _audioManager;
+        _audioManager.IsBall = true;
+        var script = ball.AddComponent<ColorChangeScript>();
+        script.AudioManager = _audioManager;
+        script.Colors = _colors;
     }
 
     private void FixedUpdate()
