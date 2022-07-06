@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleObjectPool : SingletonMonoBehaviour<ParticleObjectPool>
+public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
 {
     //[Header("animation")]
     //[SerializeField] private ParticleSystem _directionalParticles, _constantParticles, _spreadingPArticles;
 
+    [SerializeField] private Material SmokeClouds, cubes, triangles;
     [SerializeField] private GameObject _directionalParticleObject, _constantParticleObject, _spreadingPArticleObject;
 
     //[SerializeField] private List<GameObject> _directionalParticles, _constantParticles, _spreadingParticles;
@@ -15,7 +16,7 @@ public class ParticleObjectPool : SingletonMonoBehaviour<ParticleObjectPool>
     //private const int INITIAL_POOL_SIZE = 5;
     //private const int MAX_POOL_SIZE = 20;
 
-    private ParticleSystem.MinMaxGradient _currentGradient;  
+    private ParticleSystem.MinMaxGradient _currentGradient;
 
     //private void Awake()
     //{
@@ -49,25 +50,25 @@ public class ParticleObjectPool : SingletonMonoBehaviour<ParticleObjectPool>
     //    _constantParticles.Add(newParticleSystem);
     //}
 
-    public ParticleSystem GetParticleSystem(ParticleType particleType)
+    public ParticleSystem GetParticleSystem(ParticleDirection particleType)
     {
         switch (particleType)
         {
-            case ParticleType.Directional:
+            case ParticleDirection.Directional:
                 return GetParticle(_directionalParticleObject);
-             
-            case ParticleType.Constant:
+
+            case ParticleDirection.Constant:
                 return GetParticle(_constantParticleObject);
-              
-            case ParticleType.Spreading:
+
+            case ParticleDirection.Spreading:
                 return GetParticle(_spreadingPArticleObject);
-                
+
             default:
                 return null;
-              
+
         }
         //Try to find an inactive bullet
-        
+
     }
 
     private ParticleSystem GetParticle(GameObject particleobject)
@@ -149,22 +150,23 @@ public class ParticleObjectPool : SingletonMonoBehaviour<ParticleObjectPool>
         {
             if (objectToChangeColourToo.transform.TryGetComponent(out SpriteRenderer r))
             {
-                _currentGradient = new ParticleSystem.MinMaxGradient(r.color * 0.9f, r.color * 1.2f);
+                _currentGradient = new ParticleSystem.MinMaxGradient(r.color * 0.5f, r.color * 1.5f);
 
-                SetColor(PArticleSystem);               
-            }            
-        }        
+                SetColor(PArticleSystem);
+            }
+        }
     }
     void SetColor(ParticleSystem ps)
     {
         var main = ps.main;
+
         main.startColor = _currentGradient;
     }
 
-    public void SetColor(ParticleSystem ps, Color color)
+    public void SetColor(ParticleSystem ps, Color color1, Color color2)
     {
         var main = ps.main;
-        main.startColor = _currentGradient = new ParticleSystem.MinMaxGradient(color * 0.9f, color * 1.2f);
+        main.startColor = _currentGradient = new ParticleSystem.MinMaxGradient(color1, color2);
     }
 
     //RotateParticleSystem
@@ -189,6 +191,29 @@ public class ParticleObjectPool : SingletonMonoBehaviour<ParticleObjectPool>
         main.startLifetimeMultiplier = mult;
     }
 
+    public void SetMaterial(ParticleSystem particleSystem, ParticleShape shape)
+    {
+        switch (shape)
+        {
+            case ParticleShape.Clouds:
+                ChangeMaterial(SmokeClouds, particleSystem);
+                break;
+            case ParticleShape.Squares:
+                ChangeMaterial(cubes, particleSystem);
+                break;
+            case ParticleShape.Trigangles:
+                ChangeMaterial(triangles, particleSystem);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ChangeMaterial(Material mat, ParticleSystem particleSystem)
+    {
+        particleSystem.gameObject.GetComponent<ParticleSystemRenderer>().material = mat;
+    }
+
     public void SetDirectionalParticleSize(ParticleSystem ParticleSystem, float minSize, float maxSize)
     {
         var main = ParticleSystem.main;
@@ -197,13 +222,20 @@ public class ParticleObjectPool : SingletonMonoBehaviour<ParticleObjectPool>
 
         main.startSizeMultiplier = mult;
     }
-       
+
 
 }
 
-public enum ParticleType
+public enum ParticleDirection
 {
     Directional,
     Constant,
     Spreading
+}
+
+public enum ParticleShape
+{
+    Clouds,
+    Squares,
+    Trigangles
 }

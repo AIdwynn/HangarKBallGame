@@ -44,11 +44,14 @@ TagManager:
   - name: Backplate
     uniqueID: 2909532147
     locked: 0
-  - name: Background
+  - name: Walls
     uniqueID: 1983393891
     locked: 0
-  - name: BackgroundOutline
+  - name: Ground
     uniqueID: 3550669323
+    locked: 0
+  - name: Decals
+    uniqueID: 2486106495
     locked: 0
   - name: LevelBack
     uniqueID: 3752122571
