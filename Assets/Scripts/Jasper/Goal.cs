@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
@@ -10,7 +9,8 @@ public class Goal : MonoBehaviour
     {
         if (((1 << collision.gameObject.layer) & _ballLayer) != 0)
         {
-            LevelManager.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            //  LevelManager.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            Destroy(collision.gameObject);
 
         }
     }

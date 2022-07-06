@@ -33,9 +33,9 @@ public class Player : MonoBehaviour
         _rb.gravityScale = 0;
 
         _playerInput.PlayerActionMap.Movement.performed += MovementListener;
-        _playerInput.PlayerActionMap.Movement.performed += TimeChange;
+        _playerInput.PlayerActionMap.Movement.started += SlowDownTime;
         _playerInput.PlayerActionMap.Movement.canceled += MovementCanceled;
-        _playerInput.PlayerActionMap.Movement.canceled += TimeChange;
+        _playerInput.PlayerActionMap.Movement.canceled += OriginalTime;
 
         _playerInput.PlayerActionMap.Aim.performed += AimListener;
 
@@ -58,21 +58,31 @@ public class Player : MonoBehaviour
         // TimeChange();
         MovePlayer();
         RotateReflector(_aimInputVector.x, _aimInputVector.y);
-        Debug.Log(TimeManager.TimeScaling.global);
+        // Debug.Log(TimeManager.TimeScaling.global);
     }
 
-    private void TimeChange(CallbackContext callbackContext)
+    private void SlowDownTime(CallbackContext callbackContext)
     {
-        if (_rb.velocity != Vector2.zero)
-        {
-            TimeManager.SlowDownTime();
-        }
-        else
-        {
-            TimeManager.OriginalTime();
-        }
-    }
+        TimeManager.SlowDownTime();
 
+    }
+    private void OriginalTime(CallbackContext callbackContext)
+    {
+        TimeManager.OriginalTime();
+
+    }
+    /* private void TimeChange(CallbackContext callbackContext)
+     {
+         if (_rb.velocity != Vector2.zero)
+         {
+             TimeManager.SlowDownTime();
+         }
+         else
+         {
+             TimeManager.OriginalTime();
+         }
+     }
+ */
     private void MovementListener(CallbackContext callbackContext)
     {
         _inputVal = callbackContext.ReadValue<Vector2>();

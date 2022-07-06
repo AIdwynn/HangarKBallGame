@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,17 +35,17 @@ public class Gameloop : MonoBehaviour
         {
             ballSpawner.BallSpawned += (s, e) => AssignSource(e.Ball);
         }
-        _timeManager.OnTimeChanged += (s, e) => { if (_slowedDown) { _slowedDown = false; OriginalSpeed(); } else { _slowedDown = true; SlowDownSpeed(); } };
+        //  _timeManager.OnTimeChanged += (s, e) => { if (_slowedDown) { _slowedDown = false; OriginalSpeed(); } else { _slowedDown = true; SlowDownSpeed(); } };
     }
     private void AssignSource(GameObject ball)
     {
         _audioManager.IsBall = true;
-        
+
         var script = ball.AddComponent<ColorChangeScript>();
         script.AudioManager = _audioManager;
         script.Colors = _colors;
         var script2 = ball.GetComponent<Ball>();
-        script2.BallBounced += (s,e) => { SpeedIncrease(); };
+        script2.BallBounced += (s, e) => { SpeedIncrease(); };
     }
 
     private void FixedUpdate()
@@ -62,7 +61,7 @@ public class Gameloop : MonoBehaviour
     {
         _audioManager.SpeedIncrease(_pitchIncrease);
     }
-    private void OriginalSpeed() 
+    private void OriginalSpeed()
     {
         _pitchIncrease /= _timeSlowAmount;
         _audioManager.OriginalSpeed(_timeSlowAmount);

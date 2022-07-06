@@ -22,36 +22,39 @@ public class Ball : MonoBehaviour
 
     private Vector2 _direction;
 
-    private Vector2 _beforeSlowdownVel;
 
     private void Start()
     {
         _direction = transform.right;
 
         ShootBall();
-        TimeManager.TimeChanged += TimeVelocity;
+        TimeManager.TimeSlow += BallSlowDown;
+        TimeManager.TimeOriginal += BallSpeedUp;
+        // TimeManager.TimeChanged += TimeVelocity;
     }
 
     private void FixedUpdate()
     {
         _lastVelocity = _rb.velocity;
-        if (TimeManager.TimeScaling.global == 1)
-        {
-            _beforeSlowdownVel = _rb.velocity;
-        }
+        /* if (TimeManager.TimeScaling.global == 1)
+         {
 
-        Debug.Log(_rb.velocity);
+         }*/
+
+        //    Debug.Log(_rb.velocity);
     }
 
-
-    private void TimeVelocity(object source, EventArgs eventArgs)
+    private void BallSlowDown(object source, EventArgs eventArgs)
     {
-        if (TimeManager.TimeScaling.global != 1)
-            _rb.velocity /= TimeManager.TimeScaling.global;
-        else
-            _rb.velocity = _beforeSlowdownVel;
+        _rb.velocity /= TimeManager.TimeScaling.global;
 
     }
+    private void BallSpeedUp(object source, EventArgs eventArgs)
+    {
+        _rb.velocity *= TimeManager.TimeScaling.global;
+
+    }
+
     private void ShootBall()
     {
         _rb.AddForce((_direction * _ballSpeed * Time.deltaTime) * _rb.mass, ForceMode2D.Impulse);

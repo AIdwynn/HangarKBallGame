@@ -14,6 +14,10 @@ public class TimeManager : MonoBehaviour
 
     public static event EventHandler TimeChanged;
 
+    public static event EventHandler TimeSlow;
+
+    public static event EventHandler TimeOriginal;
+
     private void Start()
     {
         _timeSpeed = _time;
@@ -26,7 +30,8 @@ public class TimeManager : MonoBehaviour
 
 
   */
-        TimeScaling.global = 2;
+        OnTimeSlow(null, EventArgs.Empty);
+        //TimeScaling.global = 2;
         // TimeScaling.global = DOTween.To(() => 1, x => timeChange = x, 1f, 0.5f).changeValue;
 
         //????????
@@ -35,9 +40,9 @@ public class TimeManager : MonoBehaviour
     }
     public static void OriginalTime()
     {
-        OnTimeChanged(null, EventArgs.Empty);
-
-        TimeScaling.global = 1;
+        //OnTimeChanged(null, EventArgs.Empty);
+        OnTimeOriginal(null, EventArgs.Empty);
+        // TimeScaling.global = 1;
         //TimeScaling.global = DOTween.To(() => 2, x => timeChange = x, 1, 0.5f).changeValue;
     }
     /* public static void ChangeTime()
@@ -59,9 +64,19 @@ public class TimeManager : MonoBehaviour
         var handler = TimeChanged;
         handler?.Invoke(null, eventArgs);
     }
+    public static void OnTimeSlow(object source, EventArgs eventArgs)
+    {
+        var handler = TimeSlow;
+        handler?.Invoke(null, eventArgs);
+    }
+    public static void OnTimeOriginal(object source, EventArgs eventArgs)
+    {
+        var handler = TimeOriginal;
+        handler?.Invoke(null, eventArgs);
+    }
     public class TimeScaling
     {
         public static float player = 1;
-        public static float global = 1;
+        public static float global = 2;
     }
 }
