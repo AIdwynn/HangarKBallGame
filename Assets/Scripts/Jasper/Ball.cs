@@ -8,7 +8,8 @@ public class Ball : MonoBehaviour
 
     public float _ballSpeed;
 
-
+    [SerializeField]
+    private float _ballSpeedUpValue;
 
     public event EventHandler BallBounced;
 
@@ -20,7 +21,7 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
-        _direction = Vector2.right;
+        _direction = transform.right;
     }
 
     private void FixedUpdate()
@@ -40,9 +41,10 @@ public class Ball : MonoBehaviour
         OnBallBounced(this, EventArgs.Empty);
 
         ContactPoint2D cp = collision.contacts[0];
-        _lastVelocity = Vector3.Reflect(_lastVelocity, cp.normal);
+        _lastVelocity = Vector3.Reflect(_lastVelocity.normalized, cp.normal);
+        _direction = _lastVelocity;
         _rb.velocity = _lastVelocity;
-
+        _ballSpeed += _ballSpeedUpValue;
         /*
                 var mult = _lastVelocity.magnitude;
                 var inDirection = _lastVelocity.normalized;
