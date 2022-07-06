@@ -8,7 +8,7 @@ public class AudioManager
 {
     private int _boopCounter;
     private int _boopMoment = 3;
-    private int _bPM;
+    private float _bPM;
     private AudioClip _song;
     private AudioClip _beepSound;
     private AudioClip _boopSound;
@@ -16,9 +16,10 @@ public class AudioManager
     private AudioSource _musicSource;
     public EventHandler boopHandler;
     public bool IsBall = false;
+    private float _timeModifier =1; 
     private float _counter;
 
-    public AudioManager(AudioClip beepSound, AudioClip boopSound, AudioSource boopSource, SongNames _songName, MusicData musicData, AudioSource musicSource)
+    public AudioManager(AudioClip beepSound, AudioClip boopSound, AudioSource boopSource, SongNames songName, MusicData musicData, AudioSource musicSource)
     {
         _beepSound = beepSound;
         _boopSound = boopSound;
@@ -27,12 +28,14 @@ public class AudioManager
 
         foreach (var item in musicData.songs)
         {
-            if (item.names == _songName)
+            if (item.names == songName)
             {
                 _bPM = item.bpm;
                 _song = item.song;
+                Debug.Log(_bPM);
             }
         }
+        _musicSource.clip = _song;
         _musicSource.loop = true;
         _musicSource.Play();
 
@@ -40,7 +43,7 @@ public class AudioManager
 
     public void FixedUpdate()
     {
-        var timeBetweenSounds = 60 / ((float)_bPM);
+        var timeBetweenSounds = 60 / ((float)_bPM*_timeModifier);
         _counter += Time.fixedDeltaTime;
         if (timeBetweenSounds < _counter) { PlayNextSound(); _counter = 0; }
     }
@@ -66,12 +69,39 @@ public class AudioManager
 
     private void ThrowBoopEvent()
     {
-        var handler = boopHandler;
-        handler.Invoke(this, new EventArgs());
+        //var handler = boopHandler;
+        //handler.Invoke(this, new EventArgs());
+        //TileMapManager.ChangeColor(_bPM * _timeModifier);
     }
 
-    public void SpeedIncrease()
+    public void SpeedIncrease(float pitchIncrease)
     {
-        _musicSource.pitch += 0.05f;
+        //_musicSource.pitch += pitchIncrease;
+        //_boopSource.pitch += pitchIncrease;
+        //_timeModifier += pitchIncrease;
+
+        var ogLength = _musicSource.clip.length/_musicSource.pitch;
+        _musicSource.pitch += pitchIncrease;
+        _boopSource.pitch += pitchIncrease;
+        _bPM = _bPM * (1 / ((_musicSource.clip.length / _musicSource.pitch)/ ogLength));
+
+
+    }
+
+    internal void OriginalSpeed(float timeSlowAmount)
+    {
+        var ogLength = _musicSource.clip.length / _musicSource.pitch;
+        _musicSource.pitch /= timeSlowAmount;
+        _boopSource.pitch /= timeSlowAmount;
+        _bPM = _bPM * (1 / ((_musicSource.clip.length / _musicSource.pitch) / ogLength));
+
+    }
+
+    internal void SlowDown(float timeSlowAmount)
+    {
+        var ogLength = _musicSource.clip.length / _musicSource.pitch;
+        _musicSource.pitch *= timeSlowAmount;
+        _boopSource.pitch *= timeSlowAmount;
+        _bPM = _bPM * (1 / ((_musicSource.clip.length / _musicSource.pitch) / ogLength));
     }
 }
