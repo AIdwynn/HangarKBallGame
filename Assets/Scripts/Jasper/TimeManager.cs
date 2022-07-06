@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
@@ -11,15 +12,21 @@ public class TimeManager : MonoBehaviour
 
     private static bool _defaultTime = true;
 
+    public static event EventHandler TimeChanged;
+
     private void Start()
     {
         _timeSpeed = _time;
     }
     public static void SlowDownTime()
     {
-        var timeChange = 1 + _timeSpeed;
-        TimeScaling.global = timeChange;
+        // OnTimeChanged(null, EventArgs.Empty);
+        /*  var timeChange = 1 + _timeSpeed;
+          TimeScaling.global = timeChange;
 
+
+  */
+        TimeScaling.global = 2;
         // TimeScaling.global = DOTween.To(() => 1, x => timeChange = x, 1f, 0.5f).changeValue;
 
         //????????
@@ -28,6 +35,8 @@ public class TimeManager : MonoBehaviour
     }
     public static void OriginalTime()
     {
+        OnTimeChanged(null, EventArgs.Empty);
+
         TimeScaling.global = 1;
         //TimeScaling.global = DOTween.To(() => 2, x => timeChange = x, 1, 0.5f).changeValue;
     }
@@ -45,6 +54,11 @@ public class TimeManager : MonoBehaviour
 
          _defaultTime = !_defaultTime;
      }*/
+    public static void OnTimeChanged(object source, EventArgs eventArgs)
+    {
+        var handler = TimeChanged;
+        handler?.Invoke(null, eventArgs);
+    }
     public class TimeScaling
     {
         public static float player = 1;

@@ -33,12 +33,18 @@ public class Player : MonoBehaviour
         _rb.gravityScale = 0;
 
         _playerInput.PlayerActionMap.Movement.performed += MovementListener;
+        _playerInput.PlayerActionMap.Movement.performed += TimeChange;
         _playerInput.PlayerActionMap.Movement.canceled += MovementCanceled;
+        _playerInput.PlayerActionMap.Movement.canceled += TimeChange;
+
         _playerInput.PlayerActionMap.Aim.performed += AimListener;
+
+        _aimInputVector = new Vector2(-1, 0);
+
         //   _playerInput.PlayerActionMap.Aim.canceled += AimCanceled;
 
 
-        Rumbler.Instance.RumblePulse(0.5f, 1f, 20, 2);
+        // Rumbler.Instance.RumblePulse(0.5f, 1f, 20, 2);
 
     }
     private void Update()
@@ -49,14 +55,13 @@ public class Player : MonoBehaviour
 
              _TESTSLOW = false;
          }*/
-        TimeChange();
+        // TimeChange();
         MovePlayer();
-        RotateReflector();
-
+        RotateReflector(_aimInputVector.x, _aimInputVector.y);
         Debug.Log(TimeManager.TimeScaling.global);
     }
 
-    private void TimeChange()
+    private void TimeChange(CallbackContext callbackContext)
     {
         if (_rb.velocity != Vector2.zero)
         {
@@ -91,25 +96,27 @@ public class Player : MonoBehaviour
         if (_inputVal.x != 0 || _inputVal.y != 0)
             _rb.AddForce(new Vector2(_inputVal.x, _inputVal.y) * Time.deltaTime * _speed * 1 / Time.timeScale);
     }
-
-    private void RotateReflector()
+    private void RotateReflector(float aimX, float aimY)
     {
         float angleDirection;
         float startAngle;
 
-        Vector2 aim = new Vector2(_aimInputVector.x, _aimInputVector.y);
+
+
+        Vector2 aim = new Vector2(aimX, aimY);
+
         aim.Normalize();
         aim /= _reflectorDistance;
         _reflector.transform.localPosition = aim;
 
 
-        Vector2 mp = Camera.main.ScreenToWorldPoint(aim);
+        /* Vector2 mp = Camera.main.ScreenToWorldPoint(aim);
 
-        Vector2 dir = mp - (Vector2)transform.position;
+         Vector2 dir = mp - (Vector2)transform.position;
 
-        angleDirection = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+         angleDirection = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        startAngle = 360 + angleDirection;
+         startAngle = 360 + angleDirection;*/
 
         float angle = Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg - 360;
 

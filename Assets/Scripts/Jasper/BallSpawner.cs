@@ -25,16 +25,23 @@ public class BallSpawner : MonoBehaviour
 
     private float _timer;
 
+    private bool _oneSpawned = false;
     private void FixedUpdate()
     {
-        _timer += Time.deltaTime / TimeManager.TimeScaling.global;
-
-        if (_timer >= _timeToSpawnBall)
+        if (!_oneSpawned)
         {
-            _timer = 0;
-            var ball = Instantiate(_ball, _ballTransformSpawnPoint);
-            OnBallSpawmed(this, new BallEventArgs(ball));
+            _timer += Time.deltaTime / TimeManager.TimeScaling.global;
+
+            if (_timer >= _timeToSpawnBall)
+            {
+                _timer = 0;
+                var ball = Instantiate(_ball, _ballTransformSpawnPoint.position, Quaternion.identity, null);
+                OnBallSpawmed(this, new BallEventArgs(ball));
+                _oneSpawned = true;
+
+            }
         }
+
     }
 
     public void OnBallSpawmed(object source, BallEventArgs eventArgs)
