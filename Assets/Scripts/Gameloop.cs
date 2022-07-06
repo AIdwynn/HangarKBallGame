@@ -15,10 +15,9 @@ public class Gameloop : MonoBehaviour
 
 
     [Header("Unchangeable Values")]
-    [SerializeField] private AudioSource _auidioSource;
+    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private MusicData _musicData;
     [SerializeField] private AudioSource _musicSource;
-    [SerializeField] private TimeManager _timeManager;
     private AudioManager _audioManager;
     private bool _slowedDown;
 
@@ -27,7 +26,7 @@ public class Gameloop : MonoBehaviour
 
     private void Awake()
     {
-        _audioManager = new AudioManager(_beepSound, _boopSound, _auidioSource, _songName, _musicData, _musicSource);
+        _audioManager = new AudioManager(_beepSound, _boopSound, _audioSource, _songName, _musicData, _musicSource);
     }
     void Start()
     {
@@ -35,7 +34,7 @@ public class Gameloop : MonoBehaviour
         {
             ballSpawner.BallSpawned += (s, e) => AssignSource(e.Ball);
         }
-        //  _timeManager.OnTimeChanged += (s, e) => { if (_slowedDown) { _slowedDown = false; OriginalSpeed(); } else { _slowedDown = true; SlowDownSpeed(); } };
+        TimeManager.TimeChanged += (s, e) => { if (_slowedDown) { _slowedDown = false; OriginalSpeed(); } else { _slowedDown = true; SlowDownSpeed(); } };
     }
     private void AssignSource(GameObject ball)
     {

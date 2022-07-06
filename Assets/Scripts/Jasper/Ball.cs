@@ -26,7 +26,7 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         _direction = transform.right;
-
+        _rb = gameObject.GetComponent<Rigidbody2D>();
         ShootBall();
         TimeManager.TimeSlow += BallSlowDown;
         TimeManager.TimeOriginal += BallSpeedUp;
@@ -46,12 +46,14 @@ public class Ball : MonoBehaviour
 
     private void BallSlowDown(object source, EventArgs eventArgs)
     {
-        _rb.velocity /= TimeManager.TimeScaling.global;
+        if (_rb != null)
+            _rb.velocity /= TimeManager.TimeScaling.global;
 
     }
     private void BallSpeedUp(object source, EventArgs eventArgs)
     {
-        _rb.velocity *= TimeManager.TimeScaling.global;
+        if (_rb != null)
+            _rb.velocity *= TimeManager.TimeScaling.global;
 
     }
 

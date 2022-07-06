@@ -422,6 +422,7 @@ MonoBehaviour:
   _ballLayer:
     serializedVersion: 2
     m_Bits: 64
+  _player: {fileID: 2265473542851025423}
 --- !u!58 &2265473544140291780
 CircleCollider2D:
   m_ObjectHideFlags: 0

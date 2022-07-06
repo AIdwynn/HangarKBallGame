@@ -21,23 +21,21 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _reflector;
 
+    [SerializeField]
+    private float _maxVel;
+
     public bool _TESTSLOW;
 
 
 
     private void Start()
     {
-        _playerInput = new PlayerInputControls();
-        _playerInput.Enable();
+
+
 
         _rb.gravityScale = 0;
+        // UnsubscribeAllEvents();
 
-        _playerInput.PlayerActionMap.Movement.performed += MovementListener;
-        _playerInput.PlayerActionMap.Movement.started += SlowDownTime;
-        _playerInput.PlayerActionMap.Movement.canceled += MovementCanceled;
-        _playerInput.PlayerActionMap.Movement.canceled += OriginalTime;
-
-        _playerInput.PlayerActionMap.Aim.performed += AimListener;
 
         _aimInputVector = new Vector2(-1, 0);
 
@@ -45,6 +43,24 @@ public class Player : MonoBehaviour
 
 
         // Rumbler.Instance.RumblePulse(0.5f, 1f, 20, 2);
+
+    }
+
+    private void Awake()
+    {
+        _playerInput = new PlayerInputControls();
+        _playerInput.Enable();
+
+        if (_playerInput != null)
+        {
+            _playerInput.PlayerActionMap.Movement.performed += MovementListener;
+            _playerInput.PlayerActionMap.Movement.started += SlowDownTime;
+            _playerInput.PlayerActionMap.Movement.canceled += MovementCanceled;
+            _playerInput.PlayerActionMap.Movement.canceled += OriginalTime;
+
+            _playerInput.PlayerActionMap.Aim.performed += AimListener;
+        }
+
 
     }
     private void Update()
@@ -102,9 +118,16 @@ public class Player : MonoBehaviour
 
     private void MovePlayer()
     {
+        if (_rb.velocity.x < _maxVel || _rb.velocity.y < _maxVel || _rb.velocity.x > -_maxVel || _rb.velocity.y > -_maxVel)
+        {
+            if (_inputVal.x != 0 || _inputVal.y != 0)
+                _rb.AddForce(new Vector2(_inputVal.x, _inputVal.y) * Time.deltaTime * _speed * TimeManager.TimeScaling.player / Time.timeScale);
+        }
 
-        if (_inputVal.x != 0 || _inputVal.y != 0)
-            _rb.AddForce(new Vector2(_inputVal.x, _inputVal.y) * Time.deltaTime * _speed * 1 / Time.timeScale);
+
+
+
+        Debug.Log(_rb.velocity);
     }
     private void RotateReflector(float aimX, float aimY)
     {
@@ -133,6 +156,16 @@ public class Player : MonoBehaviour
         _reflector.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
     }
-
-
+    public void UnsubscribeAllEvents()
+    {
+        _playerInput.PlayerActionMap.Movement.performed -= MovementListener;
+        _playerInput.PlayerActionMap.Movement.started -= SlowDownTime;
+        _playerInput.PlayerActionMap.Movement.canceled -= MovementCanceled;
+        _playerInput.PlayerActionMap.Movement.canceled -= OriginalTime;
+        _playerInput.Disable();
+    }
+    private void OnDestroy()
+    {
+        UnsubscribeAllEvents();
+    }
 }
