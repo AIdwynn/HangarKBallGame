@@ -19,7 +19,7 @@ public class Gameloop : MonoBehaviour
     [SerializeField] private AudioSource _auidioSource;
     [SerializeField] private MusicData _musicData;
     [SerializeField] private AudioSource _musicSource;
-    [SerializeField] private Player _player;
+    [SerializeField] private TimeManager _timeManager;
     private AudioManager _audioManager;
     private bool _slowedDown;
 
@@ -36,7 +36,7 @@ public class Gameloop : MonoBehaviour
         {
             ballSpawner.BallSpawned += (s, e) => AssignSource(e.Ball);
         }
-        _player.OnTimeSlowDown += (s, e) => { if (_slowedDown) { _slowedDown = false; OriginalSpeed(); } else { _slowedDown = true; SlowDownSpeed(); } };
+        _timeManager.OnTimeChanged += (s, e) => { if (_slowedDown) { _slowedDown = false; OriginalSpeed(); } else { _slowedDown = true; SlowDownSpeed(); } };
     }
     private void AssignSource(GameObject ball)
     {
