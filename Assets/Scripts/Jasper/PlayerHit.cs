@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,18 +12,12 @@ public class PlayerHit : MonoBehaviour
         if (((1 << collision.gameObject.layer) & _ballLayer) != 0)
         {
             _player.UnsubscribeAllEvents();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-            StartCoroutine(WaitASEC());
-            //StartCoroutine(WaitASEC());
 
         }
 
     }
 
-    private IEnumerator WaitASEC()
-    {
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-    }
 }

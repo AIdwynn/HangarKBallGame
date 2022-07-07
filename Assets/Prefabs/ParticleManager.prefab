@@ -46,10 +46,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SmokeClouds: {fileID: 2100000, guid: 1e76549cd0d65fc4d8104fa1f501bf04, type: 2}
   cubes: {fileID: 2100000, guid: 06c859ce5258d204aa4020bc0e4715d9, type: 2}
-  triangles: {fileID: 2100000, guid: 967363854b5fcd94db2217638941e4ea, type: 2}
-  template1: {fileID: 0}
+  cirkles: {fileID: 2100000, guid: 967363854b5fcd94db2217638941e4ea, type: 2}
+  triangles: {fileID: 2100000, guid: 1df2b523facc32a47954f5ea0af3527a, type: 2}
   template2: {fileID: 0}
   template3: {fileID: 0}
+  SmokeCloudsSprites:
+  - {fileID: 8380882296394412854, guid: 01aedb2f4fd589247ae4dbbddba98e28, type: 3}
+  - {fileID: 1885121704046766411, guid: 01aedb2f4fd589247ae4dbbddba98e28, type: 3}
+  - {fileID: 3706088073740801409, guid: 01aedb2f4fd589247ae4dbbddba98e28, type: 3}
+  - {fileID: 7949142592673654729, guid: 01aedb2f4fd589247ae4dbbddba98e28, type: 3}
+  cubesSprites:
+  - {fileID: 21300000, guid: b1ef2c6cc4bdfac498b6e3c389fde564, type: 3}
+  - {fileID: 21300000, guid: b1ef2c6cc4bdfac498b6e3c389fde564, type: 3}
+  - {fileID: 21300000, guid: b1ef2c6cc4bdfac498b6e3c389fde564, type: 3}
+  - {fileID: 21300000, guid: b1ef2c6cc4bdfac498b6e3c389fde564, type: 3}
+  cirkleSprites: []
+  triangleSprites:
+  - {fileID: 3691511987390681858, guid: d6155a23cfe9c2a43b895559d1ee5521, type: 3}
+  - {fileID: -6044066993975068668, guid: d6155a23cfe9c2a43b895559d1ee5521, type: 3}
+  - {fileID: 6904708947149427391, guid: d6155a23cfe9c2a43b895559d1ee5521, type: 3}
+  - {fileID: 7408595576108420332, guid: d6155a23cfe9c2a43b895559d1ee5521, type: 3}
+  template2Sprites: []
+  template3Sprites: []
   _directionalParticleObject: {fileID: 3051131230090951623, guid: d7b888e17e65f1941a797d2530977b96, type: 3}
   _constantParticleObject: {fileID: 4323297058726936209, guid: ad71bed4d37357a4397c69b356a7c72a, type: 3}
   _spreadingPArticleObject: {fileID: 6355677860888108965, guid: 7489ec506bfc8ae41b6631efc0315222, type: 3}

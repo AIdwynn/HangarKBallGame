@@ -5041,7 +5041,7 @@ Transform:
   m_GameObject: {fileID: 721394411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.9, y: -4, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 83047965}
   - {fileID: 3424881314101939733}
@@ -14096,8 +14096,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d180a9f7e435241984e46bffd26a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DurationMult: 1
-  FlashTiles: 1
   testMapComponent:
   - AnimationType: 0
     startColor: {r: 0, g: 0, b: 0, a: 0}
@@ -14127,8 +14125,8 @@ MonoBehaviour:
     ChangedHue: 0
     ChangedSaturation: 0
     ChangedValue: 0
-    Hueduration: 2
-    SaturationDuration: 0.5
+    Hueduration: 1
+    SaturationDuration: 1
     ValueDuration: 1
     map: {fileID: 83047967}
   - AnimationType: 1
@@ -14159,9 +14157,9 @@ MonoBehaviour:
     ChangedHue: 0
     ChangedSaturation: 0
     ChangedValue: 0
-    Hueduration: 2
-    SaturationDuration: 2
-    ValueDuration: 2
+    Hueduration: 1
+    SaturationDuration: 1
+    ValueDuration: 1
     map: {fileID: 9001678696238307528}
 --- !u!483693784 &1653051057388446820
 TilemapRenderer:
@@ -15811,6 +15809,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8336896295792358317, guid: c892d546673d10640a81e7aa093cdc8b, type: 3}
+      propertyPath: cirkles
+      value: 
+      objectReference: {fileID: 2100000, guid: 967363854b5fcd94db2217638941e4ea, type: 2}
+    - target: {fileID: 8336896295792358317, guid: c892d546673d10640a81e7aa093cdc8b, type: 3}
+      propertyPath: triangles
+      value: 
+      objectReference: {fileID: 2100000, guid: 1df2b523facc32a47954f5ea0af3527a, type: 2}
+    - target: {fileID: 8336896295792358317, guid: c892d546673d10640a81e7aa093cdc8b, type: 3}
       propertyPath: cubesSprites.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -15831,6 +15837,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b1ef2c6cc4bdfac498b6e3c389fde564, type: 3}
     - target: {fileID: 8336896295792358317, guid: c892d546673d10640a81e7aa093cdc8b, type: 3}
+      propertyPath: triangleSprites.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336896295792358317, guid: c892d546673d10640a81e7aa093cdc8b, type: 3}
       propertyPath: trianglesSprites.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -15838,6 +15848,22 @@ PrefabInstance:
       propertyPath: SmokeCloudsSprites.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8336896295792358317, guid: c892d546673d10640a81e7aa093cdc8b, type: 3}
+      propertyPath: triangleSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 3691511987390681858, guid: d6155a23cfe9c2a43b895559d1ee5521, type: 3}
+    - target: {fileID: 8336896295792358317, guid: c892d546673d10640a81e7aa093cdc8b, type: 3}
+      propertyPath: triangleSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: -6044066993975068668, guid: d6155a23cfe9c2a43b895559d1ee5521, type: 3}
+    - target: {fileID: 8336896295792358317, guid: c892d546673d10640a81e7aa093cdc8b, type: 3}
+      propertyPath: triangleSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 6904708947149427391, guid: d6155a23cfe9c2a43b895559d1ee5521, type: 3}
+    - target: {fileID: 8336896295792358317, guid: c892d546673d10640a81e7aa093cdc8b, type: 3}
+      propertyPath: triangleSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 7408595576108420332, guid: d6155a23cfe9c2a43b895559d1ee5521, type: 3}
     - target: {fileID: 8336896295792358317, guid: c892d546673d10640a81e7aa093cdc8b, type: 3}
       propertyPath: trianglesSprites.Array.data[0]
       value: 
