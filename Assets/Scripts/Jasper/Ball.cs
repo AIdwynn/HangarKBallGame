@@ -35,68 +35,66 @@ public class Ball : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //  _rb.velocity /= TimeManager.TimeScaling.global;
+
+        _rb.velocity = (_direction * _ballSpeed * Time.deltaTime) / TimeManager.TimeScaling.global;
         _lastVelocity = _rb.velocity;
-        /* if (TimeManager.TimeScaling.global == 1)
-         {
-
-         }*/
-
-        //    Debug.Log(_rb.velocity);
+        // Debug.Log(_direction);
+        //  _rb.velocity /
     }
 
     private void BallSlowDown(object source, EventArgs eventArgs)
     {
-        if (_rb != null)
-            _rb.velocity /= TimeManager.TimeScaling.global;
+        /*  if (_rb != null)
+              _rb.velocity /= TimeManager.TimeScaling.global;*/
 
     }
     private void BallSpeedUp(object source, EventArgs eventArgs)
     {
-        if (_rb != null)
-            _rb.velocity *= TimeManager.TimeScaling.global;
-
+        /*  if (_rb != null)
+              _rb.velocity *= TimeManager.TimeScaling.global;
+  */
     }
 
     private void ShootBall()
     {
-        _rb.AddForce((_direction * _ballSpeed * Time.deltaTime) * _rb.mass, ForceMode2D.Impulse);
+        // _rb.AddForce((_direction * _ballSpeed * Time.deltaTime) * _rb.mass, ForceMode2D.Impulse);
     }
 
     public void ReflectBall(Collision2D collision)
     {
         OnBallBounced(this, EventArgs.Empty);
 
-        ContactPoint2D cp = collision.contacts[0];
-        _lastVelocity = Vector3.Reflect(_lastVelocity, cp.normal);
-        _direction = _lastVelocity;
-        SetVelocity();
+        /*  ContactPoint2D cp = collision.contacts[0];
+          _lastVelocity = Vector3.Reflect(_lastVelocity, cp.normal);
+          _direction = _lastVelocity;*/
+        //  SetVelocity();
 
 
 
 
 
         // _ballSpeed += _ballSpeedUpValue;
-        /*
-                var mult = _lastVelocity.magnitude;
-                var inDirection = _lastVelocity.normalized;
 
-                if (mult < 25)
-                    _rb.velocity = Vector2.Reflect(inDirection, collision.contacts[0].normal.normalized) * (25 * 1.4f);*/
+        var mult = _lastVelocity.magnitude;
+        var inDirection = _lastVelocity.normalized;
+
+        _direction = Vector2.Reflect(inDirection, collision.contacts[0].normal.normalized);
     }
 
     private void SetVelocity()
     {
         _rb.velocity = _lastVelocity;
 
-        if (_rb.velocity.x >= _maxVelocity || _rb.velocity.x <= -_maxVelocity || _rb.velocity.y >= _maxVelocity || _rb.velocity.y <= -_maxVelocity)
-        {
-            Debug.Log("max Reached");
-        }
-        else
-        {
-            _rb.velocity = _lastVelocity * _ballSpeedUpValue;
+        /* if (_rb.velocity.x >= _maxVelocity || _rb.velocity.x <= -_maxVelocity || _rb.velocity.y >= _maxVelocity || _rb.velocity.y <= -_maxVelocity)
+         {
+             Debug.Log("max Reached");
+         }
+         else
+         {
+             _rb.velocity = _lastVelocity * _ballSpeedUpValue;
 
-        }
+         }*/
     }
 
     public void OnBallBounced(object source, EventArgs eventArgs)

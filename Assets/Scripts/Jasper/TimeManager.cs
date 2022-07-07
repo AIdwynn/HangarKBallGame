@@ -18,9 +18,19 @@ public class TimeManager : MonoBehaviour
 
     public static event EventHandler TimeOriginal;
 
+    [SerializeField]
+    private AnimationCurve _animCurve;
+
+    public static float _playerSpeed;
+
     private void Start()
     {
         _timeSpeed = _time;
+    }
+    private void Update()
+    {
+        //Debug.Log(_playerSpeed);
+        TimeScaling.global = _animCurve.Evaluate(_playerSpeed);
     }
     public static void SlowDownTime()
     {
