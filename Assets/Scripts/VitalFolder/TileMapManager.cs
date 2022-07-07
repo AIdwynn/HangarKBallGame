@@ -16,6 +16,8 @@ public class TileMapManager : MonoBehaviour
 
     public bool FlashTiles = true;
 
+
+
     public List<MapComponent> testMapComponent;
 
 

@@ -35,11 +35,11 @@ public class ParticleTester : MonoBehaviour
                                .Activate(TestHandleLocation);                               // Activate PArticleSystem at location ( not parented)
 
             //constant particly system will chilld itself to the object and play constantly untill turned off manually or after x seconds.
-            ParticleSpawner ConstantSystem = new ParticleSpawner(ParticleDirection.Constant, ParticleShape.Trigangles)   // initialize particle system with Type and material
+            ParticleSpawner ConstantSystem = new ParticleSpawner(ParticleDirection.Constant, ParticleShape.cirkles)   // initialize particle system with Type and material
                                 .ChangeSize(0.5f, 0.8f)                                 // Change size of Particle -> uses multiplication of the current speed with 1 keeping it the same 
                                 .SetColourGradient(Color.white, Color.blue)             // Set Colour gradient of particle
                                 .Activate(TestHandleLocation)                           // Activate -> in case of constant particles, will child itself to passed in object. 
-                                .StopConstantAfterSeconds(1f);                        // Will Destroy and stop the constant particle system after x Seconds
+                                .StopConstantAfterSeconds(1f);                          // Will Destroy and stop the constant particle system after x Seconds
 
             
             //ConstantSystem.StopConstant();

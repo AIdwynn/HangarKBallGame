@@ -14,6 +14,9 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     [SerializeField] private Material SmokeClouds;
     [SerializeField] private Material cubes, triangles, template1, template2, template3;
 
+    [SerializeField] private Sprite[] SmokeCloudsSprites;
+    [SerializeField] private Sprite[] cubesSprites, trianglesSprites, template1Sprites, template2Sprites, template3Sprites;
+
     [Header("ParticleSystems")]
     [SerializeField] private GameObject _directionalParticleObject;
     [SerializeField] private GameObject _constantParticleObject, _spreadingPArticleObject;
@@ -210,9 +213,14 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
         main.startLifetimeMultiplier = mult;
     }
 
-    private void ChangeMaterial(Material mat, ParticleSystem particleSystem)
+    private void ChangeMaterial(Material mat, ParticleSystem particleSystem, Sprite[] sprites)
     {
         particleSystem.gameObject.GetComponent<ParticleSystemRenderer>().material = mat;
+        for (int i = 0; i < sprites.Length - 1; i++)
+        {
+            particleSystem.gameObject.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(i, sprites[i]);
+        }
+
     }
 
     public void SetParticleSize(ParticleSystem ParticleSystem, float minSize, float maxSize)
@@ -228,22 +236,22 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
         switch (shape)
         {
             case ParticleShape.Clouds:
-                ChangeMaterial(SmokeClouds, particleSystem);
+                ChangeMaterial(SmokeClouds, particleSystem, SmokeCloudsSprites);
                 break;
             case ParticleShape.Squares:
-                ChangeMaterial(cubes, particleSystem);
+                ChangeMaterial(cubes, particleSystem, cubesSprites);
                 break;
-            case ParticleShape.Trigangles:
-                ChangeMaterial(triangles, particleSystem);
+            case ParticleShape.cirkles:
+                ChangeMaterial(triangles, particleSystem, trianglesSprites);
                 break;
             case ParticleShape.template1:
-                ChangeMaterial(template1, particleSystem);
+                ChangeMaterial(template1, particleSystem, template1Sprites);
                 break;
             case ParticleShape.template2:
-                ChangeMaterial(template2, particleSystem);
+                ChangeMaterial(template2, particleSystem, template2Sprites);
                 break;
             case ParticleShape.template3:
-                ChangeMaterial(template3, particleSystem);
+                ChangeMaterial(template3, particleSystem, template3Sprites);
                 break;
             default:
                 break;
@@ -251,7 +259,10 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     }
 
 
+    
+
 }
+
 
 //if u wanna add different types of systems, let me know, thats a bit more difficult
 public enum ParticleDirection
@@ -266,7 +277,7 @@ public enum ParticleShape
 {
     Clouds,
     Squares,
-    Trigangles,
+    cirkles,
     template1,
     template2,
     template3

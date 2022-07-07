@@ -1534,14 +1534,14 @@ ParticleSystem:
     tilesY: 1
     animationType: 0
     rowIndex: 0
-    cycles: 1
+    cycles: 0.0001
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -1395370121931036168, guid: 27be576655a1fc44ba79738fccc8fe0e, type: 3}
-    - sprite: {fileID: 139254161338798628, guid: 27be576655a1fc44ba79738fccc8fe0e, type: 3}
-    - sprite: {fileID: 7436036490771105485, guid: 27be576655a1fc44ba79738fccc8fe0e, type: 3}
-    - sprite: {fileID: 5565565949956562924, guid: 27be576655a1fc44ba79738fccc8fe0e, type: 3}
+    - sprite: {fileID: 8380882296394412854, guid: 01aedb2f4fd589247ae4dbbddba98e28, type: 3}
+    - sprite: {fileID: 1885121704046766411, guid: 01aedb2f4fd589247ae4dbbddba98e28, type: 3}
+    - sprite: {fileID: 3706088073740801409, guid: 01aedb2f4fd589247ae4dbbddba98e28, type: 3}
+    - sprite: {fileID: 7949142592673654729, guid: 01aedb2f4fd589247ae4dbbddba98e28, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4838,7 +4838,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1171097315
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
