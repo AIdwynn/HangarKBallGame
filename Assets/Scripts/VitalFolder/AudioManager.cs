@@ -7,38 +7,51 @@ using System;
 public class AudioManager
 {
     private int _boopCounter;
-    private int _boopMoment = 3;
+    private int _boopMoment;
+    private float _startBPM;
     private float _bPM;
+    private MusicData _data;
     private AudioClip _song;
     private AudioClip _beepSound;
     private AudioClip _boopSound;
     private AudioSource _boopSource;
     private AudioSource _musicSource;
-    public EventHandler boopHandler;
-    public bool IsBall = false;
+    private TileMapManager _tileMapManager;
+    private float _slowAmount;
     private float _timeModifier =1; 
     private float _counter;
 
-    public AudioManager(AudioClip beepSound, AudioClip boopSound, AudioSource boopSource, SongNames songName, MusicData musicData, AudioSource musicSource)
+    public AudioManager(AudioClip beepSound, AudioClip boopSound, AudioSource boopSource, SongNames songName, MusicData musicData, AudioSource musicSource, TileMapManager tileMapManager, float slowAmount, int boopMoment)
     {
         _beepSound = beepSound;
         _boopSound = boopSound;
         _boopSource = boopSource;
         _musicSource = musicSource;
+        _musicSource.loop = true;
+        _tileMapManager = tileMapManager;
+        _slowAmount = slowAmount;
+        _data = musicData;
+        _boopMoment = boopMoment;
 
-        foreach (var item in musicData.songs)
+        ChangeSong(songName);
+
+    }
+
+    public void ChangeSong(SongNames songName)
+    {
+        foreach (var item in _data.songs)
         {
             if (item.names == songName)
             {
+                _startBPM = item.bpm;
                 _bPM = item.bpm;
                 _song = item.song;
                 Debug.Log(_bPM);
             }
         }
+        _tileMapManager.ChangeSpeed(_bPM/_boopMoment);
         _musicSource.clip = _song;
-        _musicSource.loop = true;
         _musicSource.Play();
-
     }
 
     public void FixedUpdate()
@@ -48,14 +61,14 @@ public class AudioManager
         if (timeBetweenSounds < _counter) { PlayNextSound(); _counter = 0; }
     }
 
+
+
     private void PlayNextSound()
     {
-        if (_boopCounter == _boopMoment)
+        if (_boopCounter == _boopMoment-1)
         {
             _boopSource.clip = _boopSound;
             _boopSource.Play();
-            if(IsBall)
-                ThrowBoopEvent();
             _boopCounter = 0;
         }
         else
@@ -67,41 +80,11 @@ public class AudioManager
 
     }
 
-    private void ThrowBoopEvent()
+    internal void ChangeBpm(float normalisedTimeScale)
     {
-        //var handler = boopHandler;
-        //handler.Invoke(this, new EventArgs());
-        //TileMapManager.ChangeColor(_bPM * _timeModifier);
-    }
-
-    public void SpeedIncrease(float pitchIncrease)
-    {
-        //_musicSource.pitch += pitchIncrease;
-        //_boopSource.pitch += pitchIncrease;
-        //_timeModifier += pitchIncrease;
-
-        var ogLength = _musicSource.clip.length/_musicSource.pitch;
-        _musicSource.pitch += pitchIncrease;
-        _boopSource.pitch += pitchIncrease;
-        _bPM = _bPM * (1 / ((_musicSource.clip.length / _musicSource.pitch)/ ogLength));
-
-
-    }
-
-    internal void OriginalSpeed(float timeSlowAmount)
-    {
-        var ogLength = _musicSource.clip.length / _musicSource.pitch;
-        _musicSource.pitch /= timeSlowAmount;
-        _boopSource.pitch /= timeSlowAmount;
-        _bPM = _bPM * (1 / ((_musicSource.clip.length / _musicSource.pitch) / ogLength));
-
-    }
-
-    internal void SlowDown(float timeSlowAmount)
-    {
-        var ogLength = _musicSource.clip.length / _musicSource.pitch;
-        _musicSource.pitch *= timeSlowAmount;
-        _boopSource.pitch *= timeSlowAmount;
-        _bPM = _bPM * (1 / ((_musicSource.clip.length / _musicSource.pitch) / ogLength));
+        _musicSource.pitch = Mathf.Lerp(_musicSource.pitch, _slowAmount, normalisedTimeScale);
+        _boopSource.pitch = Mathf.Lerp(_musicSource.pitch, _slowAmount, normalisedTimeScale);
+        _bPM = _startBPM * (1 / ((_musicSource.clip.length / _musicSource.pitch) / _musicSource.clip.length));
+        _tileMapManager.ChangeSpeed(_bPM/_boopMoment);
     }
 }
