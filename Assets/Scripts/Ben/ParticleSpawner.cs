@@ -49,9 +49,16 @@ public class ParticleSpawner
         return this;
     }
 
-    public ParticleSpawner SetColour(Color color1, Color color2)
+    public ParticleSpawner SetColour(Color color1)
     {
-        ParticleManager.Instance.SetColor(_currentSystem, color1, color2);
+        ParticleManager.Instance.SetColorSingle(_currentSystem, color1);
+
+        return this;
+    }
+
+    public ParticleSpawner SetColourGradient(Color color1, Color color2)
+    {
+        ParticleManager.Instance.SetColorGradient(_currentSystem, color1, color2);
 
         return this;
     }
@@ -65,14 +72,21 @@ public class ParticleSpawner
 
     public ParticleSpawner ChangeSpeed(float minSpeed, float maxSpeed)
     {
-        ParticleManager.Instance.SetDirectionalParticleSpeed(_currentSystem, minSpeed, maxSpeed);
+        ParticleManager.Instance.SetParticleSpeed(_currentSystem, minSpeed, maxSpeed);
+
+        return this;
+    }
+
+    public ParticleSpawner ChangeLifeTime(float MinLifeTime, float Maxlifetime)
+    {
+        ParticleManager.Instance.SetParticleSpeed(_currentSystem, MinLifeTime, Maxlifetime);
 
         return this;
     }
 
     public ParticleSpawner ChangeSize(float minSize, float maxSzie)
     {
-        ParticleManager.Instance.SetDirectionalParticleSize(_currentSystem, minSize, maxSzie);
+        ParticleManager.Instance.SetParticleSize(_currentSystem, minSize, maxSzie);
 
         return this;
     }
