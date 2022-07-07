@@ -2,14 +2,24 @@ using DAE.Gamesystem.Singleton;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
 {
     //[Header("animation")]
     //[SerializeField] private ParticleSystem _directionalParticles, _constantParticles, _spreadingPArticles;
 
-    [SerializeField] private Material SmokeClouds, cubes, triangles;
-    [SerializeField] private GameObject _directionalParticleObject, _constantParticleObject, _spreadingPArticleObject;
+    //Add materialshere, (change template materials)
+    [Header("Materials")]
+    [SerializeField] private Material SmokeClouds;
+    [SerializeField] private Material cubes, cirkles, triangles, template2, template3;
+
+    [SerializeField] private Sprite[] SmokeCloudsSprites;
+    [SerializeField] private Sprite[] cubesSprites, cirkleSprites, triangleSprites, template2Sprites, template3Sprites;
+
+    [Header("ParticleSystems")]
+    [SerializeField] private GameObject _directionalParticleObject;
+    [SerializeField] private GameObject _constantParticleObject, _spreadingPArticleObject;
 
     //[SerializeField] private List<GameObject> _directionalParticles, _constantParticles, _spreadingParticles;
 
@@ -118,8 +128,7 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     public void PlayConstantParticleSystem(ParticleSystem ParticleSystem, Transform PlayLocation)
     {
         ParticleSystem.transform.parent = PlayLocation;
-        //var main = ParticleSystem.main;
-        //main.stopAction = ParticleSystemStopAction.Destroy;
+
         ParticleSystem.Play();
     }
     public void StopConstantParticleSystem(ParticleSystem ParticleSystem)
@@ -148,7 +157,7 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     {
         if (objectToChangeColourToo != null)
         {
-            if (objectToChangeColourToo.transform.TryGetComponent(out SpriteRenderer r))
+            if (objectToChangeColourToo.transform.TryGetComponent(out Tilemap r))
             {
                 _currentGradient = new ParticleSystem.MinMaxGradient(r.color * 0.5f, r.color * 1.5f);
 
@@ -163,7 +172,13 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
         main.startColor = _currentGradient;
     }
 
-    public void SetColor(ParticleSystem ps, Color color1, Color color2)
+    public void SetColorSingle(ParticleSystem ps, Color color)
+    {
+        var main = ps.main;
+        main.startColor = color;
+    }
+
+    public void SetColorGradient(ParticleSystem ps, Color color1, Color color2)
     {
         var main = ps.main;
         main.startColor = _currentGradient = new ParticleSystem.MinMaxGradient(color1, color2);
@@ -176,45 +191,38 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
 
         ParticleSystem.Play();
 
-        var main = ParticleSystem.main;
 
-        main.stopAction = ParticleSystemStopAction.Destroy;
     }
 
-    public void SetDirectionalParticleSpeed(ParticleSystem ParticleSystem, float minSpeed, float maxSpeed)
+    public void SetParticleSpeed(ParticleSystem ParticleSystem, float minSpeed, float maxSpeed)
     {
         var main = ParticleSystem.main;
 
         var mult = Random.Range(minSpeed, maxSpeed);
 
         main.startSpeedMultiplier = mult;
+
+    }
+
+    public void SetParticleLifeTime(ParticleSystem ParticleSystem, float minSpeed, float maxSpeed)
+    {
+        var main = ParticleSystem.main;
+
+        var mult = Random.Range(minSpeed, maxSpeed);
+
         main.startLifetimeMultiplier = mult;
     }
 
-    public void SetMaterial(ParticleSystem particleSystem, ParticleShape shape)
+    private void ChangeMaterial(Material mat, ParticleSystem particleSystem, Sprite[] sprites)
     {
-        switch (shape)
+        particleSystem.gameObject.GetComponent<ParticleSystemRenderer>().material = mat;
+        for (int i = 0; i < sprites.Length - 1; i++)
         {
-            case ParticleShape.Clouds:
-                ChangeMaterial(SmokeClouds, particleSystem);
-                break;
-            case ParticleShape.Squares:
-                ChangeMaterial(cubes, particleSystem);
-                break;
-            case ParticleShape.Trigangles:
-                ChangeMaterial(triangles, particleSystem);
-                break;
-            default:
-                break;
+            particleSystem.gameObject.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(i, sprites[i]);
         }
     }
 
-    private void ChangeMaterial(Material mat, ParticleSystem particleSystem)
-    {
-        particleSystem.gameObject.GetComponent<ParticleSystemRenderer>().material = mat;
-    }
-
-    public void SetDirectionalParticleSize(ParticleSystem ParticleSystem, float minSize, float maxSize)
+    public void SetParticleSize(ParticleSystem ParticleSystem, float minSize, float maxSize)
     {
         var main = ParticleSystem.main;
 
@@ -222,10 +230,37 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
 
         main.startSizeMultiplier = mult;
     }
-
+    public void SetMaterial(ParticleSystem particleSystem, ParticleShape shape)
+    {
+        switch (shape)
+        {
+            case ParticleShape.Clouds:
+                ChangeMaterial(SmokeClouds, particleSystem, SmokeCloudsSprites);
+                break;
+            case ParticleShape.Squares:
+                ChangeMaterial(cubes, particleSystem, cubesSprites);
+                break;
+            case ParticleShape.cirkles:
+                ChangeMaterial(cirkles, particleSystem, cirkleSprites);
+                break;
+            case ParticleShape.triangles:
+                ChangeMaterial(triangles, particleSystem, triangleSprites);
+                break;
+            case ParticleShape.template2:
+                ChangeMaterial(template2, particleSystem, template2Sprites);
+                break;
+            case ParticleShape.template3:
+                ChangeMaterial(template3, particleSystem, template3Sprites);
+                break;
+            default:
+                break;
+        }
+    }    
 
 }
 
+
+//if u wanna add different types of systems, let me know, thats a bit more difficult
 public enum ParticleDirection
 {
     Directional,
@@ -233,9 +268,13 @@ public enum ParticleDirection
     Spreading
 }
 
+//add material here if needed, change templates with F2, plug them into the right sockets in inspector
 public enum ParticleShape
 {
     Clouds,
     Squares,
-    Trigangles
+    cirkles,
+    triangles,
+    template2,
+    template3
 }
