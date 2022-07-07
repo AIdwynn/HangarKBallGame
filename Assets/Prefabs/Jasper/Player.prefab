@@ -82,6 +82,7 @@ MonoBehaviour:
   _rb: {fileID: 2265473542851025409}
   _reflectorDistance: 0.5
   _reflector: {fileID: 2265473543962941723}
+  _maxVel: 10
   _TESTSLOW: 0
 --- !u!50 &2265473542851025409
 Rigidbody2D:

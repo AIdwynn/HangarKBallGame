@@ -27,6 +27,14 @@ public class Player : MonoBehaviour
     public bool _TESTSLOW;
 
 
+    [SerializeField]
+    private float _playerPushbackForce;
+
+
+    private Transform _fromRotReflect;
+
+    [SerializeField]
+    private float _smoothnessAim;
 
     private void Start()
     {
@@ -60,7 +68,7 @@ public class Player : MonoBehaviour
 
             _playerInput.PlayerActionMap.Aim.performed += AimListener;
         }
-
+        _fromRotReflect = _reflector.transform;
 
     }
     private void Update()
@@ -73,8 +81,16 @@ public class Player : MonoBehaviour
          }*/
         // TimeChange();
         MovePlayer();
+        TimeManager._playerSpeed = _rb.velocity.magnitude / _maxVel;
         RotateReflector(_aimInputVector.x, _aimInputVector.y);
+
+        _fromRotReflect = _reflector.transform;
         // Debug.Log(TimeManager.TimeScaling.global);
+    }
+    public void Pushback(Collision2D collision)
+    {
+
+        _rb.AddForce(_reflector.transform.transform.right * _playerPushbackForce, ForceMode2D.Impulse);
     }
 
     private void SlowDownTime(CallbackContext callbackContext)
@@ -127,7 +143,6 @@ public class Player : MonoBehaviour
 
 
 
-        Debug.Log(_rb.velocity);
     }
     private void RotateReflector(float aimX, float aimY)
     {
@@ -136,22 +151,18 @@ public class Player : MonoBehaviour
 
 
 
-        Vector2 aim = new Vector2(aimX, aimY);
-
-        aim.Normalize();
-        aim /= _reflectorDistance;
-        _reflector.transform.localPosition = aim;
-
-
-        /* Vector2 mp = Camera.main.ScreenToWorldPoint(aim);
-
-         Vector2 dir = mp - (Vector2)transform.position;
-
-         angleDirection = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-         startAngle = 360 + angleDirection;*/
-
+        Vector3 aim = -Vector3.up * aimX + Vector3.right * aimY;// new Vector2(aimX, aimY);
+        /*  Debug.Log(aim);
+          aim.Normalize();
+          aim /= _reflectorDistance;
+          _reflector.transform.localPosition = aim;*/
         float angle = Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg - 360;
+
+        //Quaternion newRot = Quaternion.LookRotation(aim, -Vector3.forward);
+        angle = Mathf.LerpAngle(angle, Mathf.Atan2(aim.x, -aim.y) * Mathf.Rad2Deg - 360, Time.time * _smoothnessAim);
+
+        //   _reflector.transform.rotation = Quaternion.RotateTowards(_fromRotReflect.rotation, newRot, 3000 * Time.deltaTime);
+        //_reflector.transform.rotation = Quaternion.Euler(_reflector.transform.rotation.eulerAngles.x, _reflector.transform.rotation.eulerAngles.y, 0);
 
         _reflector.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
