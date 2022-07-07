@@ -69,6 +69,11 @@ public class TileMapManager : MonoBehaviour
         }
     }
 
+    public void ChangeSpeed(float BPM)
+    {
+
+    }
+
 
     // lerp
     IEnumerator FlashTileLoopHue(float duration, MapComponent mapcomponent)

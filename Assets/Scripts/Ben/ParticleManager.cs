@@ -220,7 +220,6 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
         {
             particleSystem.gameObject.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(i, sprites[i]);
         }
-
     }
 
     public void SetParticleSize(ParticleSystem ParticleSystem, float minSize, float maxSize)
@@ -256,10 +255,7 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
             default:
                 break;
         }
-    }
-
-
-    
+    }    
 
 }
 
