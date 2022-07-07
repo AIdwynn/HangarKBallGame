@@ -14097,6 +14097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DurationMult: 1
+  bpm: 60
   FlashTiles: 1
   testMapComponent:
   - AnimationType: 0
@@ -14127,8 +14128,8 @@ MonoBehaviour:
     ChangedHue: 0
     ChangedSaturation: 0
     ChangedValue: 0
-    Hueduration: 2
-    SaturationDuration: 0.5
+    Hueduration: 1
+    SaturationDuration: 1
     ValueDuration: 1
     map: {fileID: 83047967}
   - AnimationType: 1
@@ -14159,9 +14160,9 @@ MonoBehaviour:
     ChangedHue: 0
     ChangedSaturation: 0
     ChangedValue: 0
-    Hueduration: 2
-    SaturationDuration: 2
-    ValueDuration: 2
+    Hueduration: 1
+    SaturationDuration: 1
+    ValueDuration: 1
     map: {fileID: 9001678696238307528}
 --- !u!483693784 &1653051057388446820
 TilemapRenderer:

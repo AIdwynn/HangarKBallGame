@@ -12,11 +12,9 @@ public class TileMapManager : MonoBehaviour
 
     //[SerializeField] private List<Tilemap> _decals;
 
-    public float DurationMult = 1;
+    private float DurationMult = 1;
 
-    public bool FlashTiles = true;
-
-
+    private bool FlashTiles = true;
 
     public List<MapComponent> testMapComponent;
 
@@ -67,11 +65,13 @@ public class TileMapManager : MonoBehaviour
 
             ApplyMapColour(testMapComponent[i]);
         }
-    }
+
+
+    }   
 
     public void ChangeSpeed(float BPM)
     {
-
+       DurationMult = 60 / BPM; 
     }
 
 
