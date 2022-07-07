@@ -20,7 +20,7 @@ public class ParticleTester : MonoBehaviour
             // to use the particle system make sure the ParticleManager Prefab is in the Scene
 
             //Non cosstant ones are used once, they jus tplay in the world 1x at given location
-            new ParticleSpawner(ParticleDirection.Directional, ParticleShape.Clouds)    // initialize particle system with Type and material
+            new ParticleSpawner(ParticleDirection.Directional, ParticleShape.triangles)    // initialize particle system with Type and material
                           .ChangeSpeed(2f, 2.6f)                                        // Change speed of Particle -> uses multiplication of the current speed with 1 keeping it the same 
                           .ChangeSize(0.7f, 1.5f)                                       // Change size of Particle -> uses multiplication of the current speed with 1 keeping it the same 
                           .SetColourGradient(Color.blue, Color.cyan)                    // Set Colour gradient of particle

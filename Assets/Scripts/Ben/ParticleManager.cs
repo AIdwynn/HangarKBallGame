@@ -12,10 +12,10 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     //Add materialshere, (change template materials)
     [Header("Materials")]
     [SerializeField] private Material SmokeClouds;
-    [SerializeField] private Material cubes, triangles, template1, template2, template3;
+    [SerializeField] private Material cubes, cirkles, triangles, template2, template3;
 
     [SerializeField] private Sprite[] SmokeCloudsSprites;
-    [SerializeField] private Sprite[] cubesSprites, trianglesSprites, template1Sprites, template2Sprites, template3Sprites;
+    [SerializeField] private Sprite[] cubesSprites, cirkleSprites, triangleSprites, template2Sprites, template3Sprites;
 
     [Header("ParticleSystems")]
     [SerializeField] private GameObject _directionalParticleObject;
@@ -241,10 +241,10 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
                 ChangeMaterial(cubes, particleSystem, cubesSprites);
                 break;
             case ParticleShape.cirkles:
-                ChangeMaterial(triangles, particleSystem, trianglesSprites);
+                ChangeMaterial(cirkles, particleSystem, cirkleSprites);
                 break;
-            case ParticleShape.template1:
-                ChangeMaterial(template1, particleSystem, template1Sprites);
+            case ParticleShape.triangles:
+                ChangeMaterial(triangles, particleSystem, triangleSprites);
                 break;
             case ParticleShape.template2:
                 ChangeMaterial(template2, particleSystem, template2Sprites);
@@ -274,7 +274,7 @@ public enum ParticleShape
     Clouds,
     Squares,
     cirkles,
-    template1,
+    triangles,
     template2,
     template3
 }
