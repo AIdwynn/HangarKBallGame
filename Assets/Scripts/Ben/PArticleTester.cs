@@ -39,7 +39,7 @@ public class ParticleTester : MonoBehaviour
                                 .ChangeSize(0.5f, 0.8f)                                 // Change size of Particle -> uses multiplication of the current speed with 1 keeping it the same 
                                 .SetColourGradient(Color.white, Color.blue)             // Set Colour gradient of particle
                                 .Activate(TestHandleLocation)                           // Activate -> in case of constant particles, will child itself to passed in object. 
-                                .StopConstantAfterSeconds(2.5f);                        // Will Destroy and stop the constant particle system after x Seconds
+                                .StopConstantAfterSeconds(1f);                        // Will Destroy and stop the constant particle system after x Seconds
 
             
             //ConstantSystem.StopConstant();
