@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     {
         _playerInput = new PlayerInputControls();
         _playerInput.Enable();
-
+        _ps = new ParticleSpawner(ParticleDirection.Constant, ParticleShape.Clouds);
         if (_playerInput != null)
         {
             _playerInput.PlayerActionMap.Movement.performed += MovementListener;
@@ -71,6 +71,8 @@ public class Player : MonoBehaviour
         _fromRotReflect = _reflector.transform;
 
     }
+    ParticleSpawner _ps;
+    private bool _isBreaking = false;
     private void Update()
     {
         /* if (_TESTSLOW)
@@ -80,6 +82,21 @@ public class Player : MonoBehaviour
              _TESTSLOW = false;
          }*/
         // TimeChange();
+
+        Debug.Log(Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized));
+
+        if (Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized) < 0.5 && Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized) > -0.5 && _isBreaking)
+        {
+            _ps = new ParticleSpawner(ParticleDirection.Constant, ParticleShape.Clouds).Activate(gameObject.transform);
+
+            _isBreaking = false;
+        }
+        else
+        {
+            _ps.StopConstant();
+            _isBreaking = true;
+        }
+
         MovePlayer();
         TimeManager._playerSpeed = _rb.velocity.magnitude / _maxVel;
         RotateReflector(_aimInputVector.x, _aimInputVector.y);
@@ -89,8 +106,18 @@ public class Player : MonoBehaviour
     }
     public void Pushback(Collision2D collision)
     {
+        if (_inputVal == Vector2.zero)
+        {
+            Debug.Log("lol");
+            _rb.AddForce(_reflector.transform.transform.right * _playerPushbackForce, ForceMode2D.Impulse);
 
-        _rb.AddForce(_reflector.transform.transform.right * _playerPushbackForce, ForceMode2D.Impulse);
+        }
+        else
+        {
+            _rb.AddForce(_reflector.transform.transform.right * (_playerPushbackForce / 2) * _rb.velocity.magnitude, ForceMode2D.Impulse);
+
+        }
+
     }
 
     private void SlowDownTime(CallbackContext callbackContext)
