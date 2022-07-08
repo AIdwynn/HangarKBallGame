@@ -243,6 +243,26 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
         main.startRotation = new ParticleSystem.MinMaxCurve(minRotation, Maxrotation);
     }
 
+    public void SetOutPutAmount(ParticleSystem ParticleSystem, short minAmount, short Maxamount)
+    {
+        var emission = ParticleSystem.emission;
+
+        if (emission.enabled)
+        {
+            if (emission.burstCount > 0)
+            {
+                emission.SetBurst(0, new ParticleSystem.Burst(0, minAmount, Maxamount));
+            }
+            else
+            {
+                emission.rateOverDistance = Random.Range(minAmount, Maxamount);
+            }
+        }
+
+
+
+    }
+
     public void SetMaterial(ParticleSystem particleSystem, ParticleShape shape)
     {
         switch (shape)
