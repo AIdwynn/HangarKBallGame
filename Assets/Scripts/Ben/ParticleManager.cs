@@ -127,14 +127,16 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     //Call on update
     public void PlayConstantParticleSystem(ParticleSystem ParticleSystem, Transform PlayLocation)
     {
+        ParticleSystem.transform.position = PlayLocation.position;
         ParticleSystem.transform.parent = PlayLocation;
 
         ParticleSystem.Play();
     }
     public void StopConstantParticleSystem(ParticleSystem ParticleSystem)
     {
+        var main = ParticleSystem.main;
+        main.stopAction = ParticleSystemStopAction.Destroy;
         ParticleSystem.Stop();
-        Destroy(ParticleSystem.gameObject);
 
     }
     public void StopConstantParticleSystemAfterSeconds(ParticleSystem ParticleSystem, float time)
@@ -145,8 +147,9 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     {
         yield return new WaitForSeconds(time);
 
+        var main = ParticleSystem.main;
+        main.stopAction = ParticleSystemStopAction.Destroy;
         ParticleSystem.Stop();
-        Destroy(ParticleSystem.gameObject);
     }
 
 
@@ -230,6 +233,15 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
 
         main.startSizeMultiplier = mult;
     }
+
+
+    public void SetParticleRotationGradient(ParticleSystem ParticleSystem, float minRotation, float Maxrotation)
+    {
+        var main = ParticleSystem.main;
+
+        main.startRotation = new ParticleSystem.MinMaxCurve(minRotation, Maxrotation);
+    }
+
     public void SetMaterial(ParticleSystem particleSystem, ParticleShape shape)
     {
         switch (shape)
@@ -255,7 +267,7 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
             default:
                 break;
         }
-    }    
+    }
 
 }
 
