@@ -71,7 +71,7 @@ public class ParticleTester : MonoBehaviour
             ConstantSystem = new ParticleSpawner(ParticleDirection.Constant, ParticleShape.Squares)   // initialize particle system with Type and material
                         .ChangeSize(0.1f, 0.3f)                                 // Change size of Particle -> uses multiplication of the current speed with 1 keeping it the same 
                         .SetColourGradient(Color.white, Color.blue)
-                         .ChangeEmissionAmount(1, 20)
+                        .ChangeEmissionAmount(1, 20)
                         .RotateIndividualParticles(false)
                         .Activate(TestHandleLocation);
             kekwbutton1 = false;
