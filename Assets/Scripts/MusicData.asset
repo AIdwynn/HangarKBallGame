@@ -12,31 +12,94 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa14de90dcfa4043989bb5b648b1036, type: 3}
   m_Name: MusicData
   m_EditorClassIdentifier: 
-  songs:
-  - names: 0
-    song: {fileID: 8300000, guid: 1a88e11361ef2ff4ab0f9f7b387192be, type: 3}
-    bpm: 117
-  - names: 1
-    song: {fileID: 8300000, guid: 36c7217c4201e4545875211b1a7a4522, type: 3}
-    bpm: 99
-  - names: 2
-    song: {fileID: 8300000, guid: ac188902b0eb9d54295a57f3a5b6cf2d, type: 3}
-    bpm: 92
-  - names: 3
-    song: {fileID: 8300000, guid: 3737e38d85843794397b01dbe6b46aa8, type: 3}
-    bpm: 123
-  - names: 4
-    song: {fileID: 8300000, guid: 22e9912fb397b0942b01f051c676ccbd, type: 3}
-    bpm: 108
-  - names: 5
-    song: {fileID: 8300000, guid: 79617f853c421fc42a8ef9b1b3ece992, type: 3}
-    bpm: 117
-  - names: 6
-    song: {fileID: 8300000, guid: 175d4c9d33d7a794c8bffb07b666d38e, type: 3}
-    bpm: 112
-  - names: 7
-    song: {fileID: 8300000, guid: ef6fbcb2943cfe548ac06b0ddad9b411, type: 3}
-    bpm: 99
-  - names: 8
-    song: {fileID: 8300000, guid: 52a237b37a8e7954995b942e0248c99d, type: 3}
-    bpm: 70
+  Songs:
+  - Name: 0
+    SongClip: {fileID: 8300000, guid: 79617f853c421fc42a8ef9b1b3ece992, type: 3}
+    BPM: 117
+  - Name: 1
+    SongClip: {fileID: 8300000, guid: 36c7217c4201e4545875211b1a7a4522, type: 3}
+    BPM: 99
+  - Name: 2
+    SongClip: {fileID: 8300000, guid: ac188902b0eb9d54295a57f3a5b6cf2d, type: 3}
+    BPM: 92
+  - Name: 3
+    SongClip: {fileID: 8300000, guid: 3737e38d85843794397b01dbe6b46aa8, type: 3}
+    BPM: 123
+  - Name: 4
+    SongClip: {fileID: 8300000, guid: 22e9912fb397b0942b01f051c676ccbd, type: 3}
+    BPM: 108
+  - Name: 5
+    SongClip: {fileID: 8300000, guid: 79617f853c421fc42a8ef9b1b3ece992, type: 3}
+    BPM: 117
+  - Name: 6
+    SongClip: {fileID: 8300000, guid: 175d4c9d33d7a794c8bffb07b666d38e, type: 3}
+    BPM: 112
+  - Name: 7
+    SongClip: {fileID: 8300000, guid: ef6fbcb2943cfe548ac06b0ddad9b411, type: 3}
+    BPM: 99
+  - Name: 8
+    SongClip: {fileID: 8300000, guid: 52a237b37a8e7954995b942e0248c99d, type: 3}
+    BPM: 70
+  Sounds:
+  - Name: 0
+    SoundClip: {fileID: 8300000, guid: 6b1165a1d3aed8c40a3db7e7fb593d35, type: 3}
+  - Name: 1
+    SoundClip: {fileID: 8300000, guid: b1ecab2c51947b14abb738bd4ed09fdc, type: 3}
+  - Name: 2
+    SoundClip: {fileID: 8300000, guid: 4946ee79e4d18804fb8579438a2d323b, type: 3}
+  - Name: 3
+    SoundClip: {fileID: 8300000, guid: bed2e6298627e1a45b1dd2e0e897f94a, type: 3}
+  - Name: 4
+    SoundClip: {fileID: 8300000, guid: 8a824267f9551bd4a9cca274e35f55f5, type: 3}
+  - Name: 5
+    SoundClip: {fileID: 8300000, guid: 3cc6518149bd2034d91fd83f29fa558f, type: 3}
+  - Name: 6
+    SoundClip: {fileID: 8300000, guid: 5a22ffb6897199945b1f5dbe24928d4f, type: 3}
+  - Name: 7
+    SoundClip: {fileID: 8300000, guid: e5107e753736c2d44a2c930d8c87e266, type: 3}
+  - Name: 8
+    SoundClip: {fileID: 8300000, guid: 9bcf11b5c25f85d4eabd023b4fca2ffd, type: 3}
+  - Name: 9
+    SoundClip: {fileID: 8300000, guid: 4173437f02021a2499170dbbfa4c3438, type: 3}
+  - Name: 10
+    SoundClip: {fileID: 8300000, guid: 5f8129530206c6a49928169f89261712, type: 3}
+  - Name: 11
+    SoundClip: {fileID: 8300000, guid: 158e79eb6a8e12f4e8af99785fbebec9, type: 3}
+  - Name: 12
+    SoundClip: {fileID: 8300000, guid: 10f8c000a43f37a479c55b93bc006ab4, type: 3}
+  - Name: 13
+    SoundClip: {fileID: 8300000, guid: 2c904465f5bf39440bf06b54c1949fe1, type: 3}
+  - Name: 14
+    SoundClip: {fileID: 8300000, guid: 3130403d65ef10d46a28a22d1b8cc11f, type: 3}
+  - Name: 15
+    SoundClip: {fileID: 8300000, guid: 8729501cee105964d8de1e874ee92627, type: 3}
+  - Name: 16
+    SoundClip: {fileID: 8300000, guid: 31b348252c4fcca45af72af7a99a9e7e, type: 3}
+  - Name: 17
+    SoundClip: {fileID: 8300000, guid: 77df874cc9c5b104cad6d2164ead1af1, type: 3}
+  - Name: 18
+    SoundClip: {fileID: 8300000, guid: 696fb2670011e45489048500469c700f, type: 3}
+  - Name: 19
+    SoundClip: {fileID: 8300000, guid: 98c8a55ba8bfbb64dbfecb39b73b3eef, type: 3}
+  - Name: 20
+    SoundClip: {fileID: 8300000, guid: 145b44ce6f0a234459f262779f223f53, type: 3}
+  - Name: 21
+    SoundClip: {fileID: 8300000, guid: ef17501d1ab04a34e9475fe306a50a38, type: 3}
+  - Name: 22
+    SoundClip: {fileID: 8300000, guid: a98d64c9bac3b5f489f54d4c7d915388, type: 3}
+  - Name: 23
+    SoundClip: {fileID: 8300000, guid: f0e9df68c0aa3124abed8cdcf57b9dd5, type: 3}
+  - Name: 24
+    SoundClip: {fileID: 8300000, guid: 1e322f9f7a82fc249af5ee18d28d3207, type: 3}
+  - Name: 25
+    SoundClip: {fileID: 8300000, guid: e8749d195f051ed4fa8a0a075d782d10, type: 3}
+  - Name: 26
+    SoundClip: {fileID: 8300000, guid: 5e87d5c2a4381dd4b97e2eae1eb8bb44, type: 3}
+  - Name: 27
+    SoundClip: {fileID: 8300000, guid: f25dc38b7cec0fa4db2048f57df7bd0e, type: 3}
+  - Name: 28
+    SoundClip: {fileID: 8300000, guid: 4af66858ccf5da341af5fb73882ff233, type: 3}
+  - Name: 29
+    SoundClip: {fileID: 8300000, guid: 7bf3a31714e140944b29edac20e97c84, type: 3}
+  - Name: 30
+    SoundClip: {fileID: 8300000, guid: 077b38f21b458084bb70f288805bd4a8, type: 3}

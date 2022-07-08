@@ -14,7 +14,7 @@ public class HeadBob : MonoBehaviour
 
     private IEnumerator MoveHead()
     {
-        transform.DOLocalMove(new Vector3(this.transform.localPosition.x, this.transform.localPosition.y - 0.01f, this.transform.localPosition.z), 60/BPM).SetLoops(-1, LoopType.Yoyo);
+        transform.DOLocalMove(new Vector3(this.transform.localPosition.x, this.transform.localPosition.y - 0.1f, this.transform.localPosition.z), 60/(BPM)/2).SetLoops(-1, LoopType.Yoyo);
         yield return null;
     }
 }

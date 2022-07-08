@@ -16,12 +16,14 @@ public class AudioManager
     private AudioClip _boopSound;
     private AudioSource _boopSource;
     private AudioSource _musicSource;
+    private AudioSource _characterSource;
+    private AudioSource _sfxSource;
     private Gameloop _gameloop;
     private float _slowAmount;
     private float _timeModifier =1; 
     private float _counter;
 
-    public AudioManager(AudioClip beepSound, AudioClip boopSound, AudioSource boopSource, SongNames songName, MusicData musicData, AudioSource musicSource, Gameloop gameloop, float slowAmount, int boopMoment)
+    public AudioManager(AudioClip beepSound, AudioClip boopSound, AudioSource boopSource, SongNames songName, MusicData musicData, AudioSource musicSource, Gameloop gameloop, float slowAmount, int boopMoment, AudioSource characterSource, AudioSource sfxSource)
     {
         _beepSound = beepSound;
         _boopSound = boopSound;
@@ -32,6 +34,8 @@ public class AudioManager
         _slowAmount = slowAmount;
         _data = musicData;
         _boopMoment = boopMoment;
+        _characterSource = characterSource;
+        _sfxSource = sfxSource;
 
         ChangeSong(songName);
 
@@ -39,13 +43,13 @@ public class AudioManager
 
     public void ChangeSong(SongNames songName)
     {
-        foreach (var item in _data.songs)
+        foreach (var item in _data.Songs)
         {
-            if (item.names == songName)
+            if (item.Name == songName)
             {
-                _startBPM = item.bpm;
-                _bPM = item.bpm;
-                _song = item.song;
+                _startBPM = item.BPM;
+                _bPM = item.BPM;
+                _song = item.SongClip;
                 Debug.Log(_bPM);
             }
         }
@@ -93,4 +97,26 @@ public class AudioManager
     {
         _gameloop.BPMChange(_bPM, _boopMoment);
     }
+
+    public void PlaySound(SoundNames name, bool IsPlayer)
+    {
+        foreach (var item in _data.Sounds)
+        {
+            if (item.Name == name)
+            {
+                if (IsPlayer)
+                {
+                    _characterSource.clip = item.SoundClip;
+                    _characterSource.Play();
+                }
+                else
+                {
+                    _sfxSource.clip = item.SoundClip;
+                    _sfxSource.Play();
+                }
+
+            }
+        }
+    }
 }
+
