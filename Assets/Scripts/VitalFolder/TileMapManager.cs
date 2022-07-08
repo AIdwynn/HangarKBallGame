@@ -24,7 +24,7 @@ public class TileMapManager : MonoBehaviour
     private void Start()
     {        
 
-        for (int i = 0; i < testMapComponent.Count; i++)
+        for (int i = 1; i < testMapComponent.Count; i++)
         {
             Color.RGBToHSV(testMapComponent[i].startColor, out float H1, out float S1, out float V1);
             testMapComponent[i].StartHue = H1;
