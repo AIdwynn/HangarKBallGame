@@ -191,9 +191,17 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2265473542851025423, guid: 4e9c9fc3b4a868e4c8f54478898e8636, type: 3}
+      propertyPath: _animScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265473542851025423, guid: 4e9c9fc3b4a868e4c8f54478898e8636, type: 3}
       propertyPath: _reflector
       value: 
       objectReference: {fileID: 1287585848}
+    - target: {fileID: 2265473542851025423, guid: 4e9c9fc3b4a868e4c8f54478898e8636, type: 3}
+      propertyPath: _animDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2265473542851025423, guid: 4e9c9fc3b4a868e4c8f54478898e8636, type: 3}
       propertyPath: _smoothnessAim
       value: 2
@@ -222,6 +230,14 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 2265473542851938973}
+    - target: {fileID: 2265473544140291791, guid: 4e9c9fc3b4a868e4c8f54478898e8636, type: 3}
+      propertyPath: m_SortingLayer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265473544140291791, guid: 4e9c9fc3b4a868e4c8f54478898e8636, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1348348831
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2265473543962941727, guid: 4e9c9fc3b4a868e4c8f54478898e8636, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4e9c9fc3b4a868e4c8f54478898e8636, type: 3}
@@ -291,6 +307,10 @@ PrefabInstance:
     - target: {fileID: 7413837330975072837, guid: f77b72d1bb4cd5e44862c8630cc5f1bb, type: 3}
       propertyPath: m_Name
       value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 7413837330975072837, guid: f77b72d1bb4cd5e44862c8630cc5f1bb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7413837330975072839, guid: f77b72d1bb4cd5e44862c8630cc5f1bb, type: 3}
       propertyPath: _timeToSpawnBall

@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -36,16 +38,25 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _smoothnessAim;
 
+    [SerializeField]
+    private float _animScale;
+
+    [SerializeField]
+    private float _animDuration;
+
+    ParticleSpawner _ps;
+
     private void Start()
     {
 
 
 
         _rb.gravityScale = 0;
-        // UnsubscribeAllEvents();
 
 
         _aimInputVector = new Vector2(-1, 0);
+
+        StartCoroutine(PlayerAnim());
 
         //   _playerInput.PlayerActionMap.Aim.canceled += AimCanceled;
 
@@ -58,7 +69,6 @@ public class Player : MonoBehaviour
     {
         _playerInput = new PlayerInputControls();
         _playerInput.Enable();
-        _ps = new ParticleSpawner(ParticleDirection.Constant, ParticleShape.Clouds);
         if (_playerInput != null)
         {
             _playerInput.PlayerActionMap.Movement.performed += MovementListener;
@@ -71,31 +81,35 @@ public class Player : MonoBehaviour
         _fromRotReflect = _reflector.transform;
 
     }
-    ParticleSpawner _ps;
-    private bool _isBreaking = false;
+
+    private IEnumerator PlayerAnim()
+    {
+        transform.DOScale(_animScale, _animDuration).SetLoops(-1, LoopType.Yoyo);
+
+        yield return null;
+
+        //            DOColor(Color.yellow, 2).SetLoops(-1, LoopType.Yoyo);
+
+    }
     private void Update()
     {
-        /* if (_TESTSLOW)
-         {
-             TimeManager.ChangeTime();
+        //Debug.Log(Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized));
 
-             _TESTSLOW = false;
-         }*/
-        // TimeChange();
 
-        Debug.Log(Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized));
+        //WORKING ON THIS LATER TWEAK THIS
+        /*  if (Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized) <= -0.1f)
+          {
 
-        if (Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized) < 0.5 && Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized) > -0.5 && _isBreaking)
-        {
-            _ps = new ParticleSpawner(ParticleDirection.Constant, ParticleShape.Clouds).Activate(gameObject.transform);
+              _ps = new ParticleSpawner(ParticleDirection.Constant, ParticleShape.Clouds).ChangeSize(0.4f, 0.8f).Activate(gameObject.transform).StopConstantAfterSeconds(0.5f);
 
-            _isBreaking = false;
-        }
-        else
-        {
-            _ps.StopConstant();
-            _isBreaking = true;
-        }
+
+              Debug.Log("play");
+
+
+
+          }*/
+
+        ParticleSpawn();
 
         MovePlayer();
         TimeManager._playerSpeed = _rb.velocity.magnitude / _maxVel;
@@ -103,6 +117,33 @@ public class Player : MonoBehaviour
 
         _fromRotReflect = _reflector.transform;
         // Debug.Log(TimeManager.TimeScaling.global);
+    }
+
+    private void ParticleSpawn()
+    {
+        ParticleHoverStandStill();
+    }
+
+    private void ParticleHoverStandStill()
+    {
+        if (Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized) == 0)
+        {
+
+            _ps = new ParticleSpawner(ParticleDirection.Spreading, ParticleShape.Clouds).ChangeSize(0.5f, 1).StopConstantAfterSeconds(0.5f);
+            StartCoroutine(PlayDelayedPS(_ps, 0.2F));
+        }
+        if (_inputVal != Vector2.zero)
+        {
+            _ps.StopConstant();
+        }
+    }
+
+    private IEnumerator PlayDelayedPS(ParticleSpawner ps, float timeDelay)
+    {
+
+        yield return new WaitForSeconds(timeDelay);
+        ps.Activate(gameObject.transform);
+
     }
     public void Pushback(Collision2D collision)
     {

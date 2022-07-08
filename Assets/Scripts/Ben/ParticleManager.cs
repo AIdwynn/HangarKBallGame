@@ -1,6 +1,5 @@
 using DAE.Gamesystem.Singleton;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -137,7 +136,6 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
         var main = ParticleSystem.main;
         main.stopAction = ParticleSystemStopAction.Destroy;
         ParticleSystem.Stop();
-
     }
     public void StopConstantParticleSystemAfterSeconds(ParticleSystem ParticleSystem, float time)
     {
