@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ public class Gameloop : MonoBehaviour
     [SerializeField] private MusicData _musicData;
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private TileMapManager _tileMapManager;
+    [SerializeField] private List<HeadBob> _heads;
     private AudioManager _audioManager;
 
 
@@ -27,7 +29,7 @@ public class Gameloop : MonoBehaviour
 
     private void Awake()
     {
-        _audioManager = new AudioManager(_beepSound, _boopSound, _audioSource, _startSongName, _musicData, _musicSource, _tileMapManager, _maxTimeSlowAmount, mongolen);
+        _audioManager = new AudioManager(_beepSound, _boopSound, _audioSource, _startSongName, _musicData, _musicSource, this, _maxTimeSlowAmount, mongolen);
     }
 
     private void FixedUpdate()
@@ -45,4 +47,12 @@ public class Gameloop : MonoBehaviour
         _audioManager.ChangeSong(name);
     }
 
+    internal void BPMChange(float v, float w)
+    {
+        _tileMapManager.ChangeSpeed(v/w);
+        foreach (var item in _heads)
+        {
+            item.BPM = v;
+        }
+    }
 }
