@@ -421,25 +421,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 855255593879430324, guid: 11ec58ed576790644a24536b5bd52265, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.276
+    - target: {fileID: 7019993663336353004, guid: 11ec58ed576790644a24536b5bd52265, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7040009574605975082, guid: 11ec58ed576790644a24536b5bd52265, type: 3}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7040009574605975082, guid: 11ec58ed576790644a24536b5bd52265, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4.9329
-      objectReference: {fileID: 0}
-    - target: {fileID: 7040009574605975082, guid: 11ec58ed576790644a24536b5bd52265, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4.9329
-      objectReference: {fileID: 0}
-    - target: {fileID: 7040009574605975082, guid: 11ec58ed576790644a24536b5bd52265, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 4.9329
       objectReference: {fileID: 0}
     - target: {fileID: 7040009574605975082, guid: 11ec58ed576790644a24536b5bd52265, type: 3}
       propertyPath: m_LocalPosition.x
@@ -485,10 +473,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretThomas
       objectReference: {fileID: 0}
-    - target: {fileID: 7040009574605975083, guid: 11ec58ed576790644a24536b5bd52265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11ec58ed576790644a24536b5bd52265, type: 3}
 --- !u!1 &224900452
@@ -523,13 +507,14 @@ MonoBehaviour:
   mongolen: 4
   _pitchIncrease: 0.01
   _maxTimeSlowAmount: 0.5
-  _beepSound: {fileID: 8300000, guid: c4c9cf71b47edc64b90dc60cfb7fff72, type: 3}
-  _boopSound: {fileID: 8300000, guid: ff992f4881f4493498561ca6d34e9f77, type: 3}
+  _beepSound: {fileID: 8300000, guid: 393a6e09b5f841741a0fda663b327bb9, type: 3}
+  _boopSound: {fileID: 8300000, guid: 0d4e993b413ee024ca5f3427b052bb12, type: 3}
   _startSongName: 0
   _audioSource: {fileID: 1265566818}
   _musicData: {fileID: 11400000, guid: fe7b0a2464d95db429cee9de7e30c302, type: 2}
   _musicSource: {fileID: 842094188}
   _tileMapManager: {fileID: 6023083906893910305}
+  _heads: []
   speedIncreaseBool: 0
 --- !u!4 &224900454
 Transform:
@@ -6125,7 +6110,7 @@ MonoBehaviour:
   testMapComponent:
   - AnimationType: 0
     startColor: {r: 0.8980393, g: 0.098039225, b: 0.098039225, a: 1}
-    EndColor: {r: 0.093342766, g: 0.6131152, b: 0.8679245, a: 0}
+    EndColor: {r: 0.09411764, g: 0.8666667, b: 0.83031934, a: 0}
     StartHue: 0
     StartSaturation: 0
     StartValue: 0
@@ -6140,8 +6125,8 @@ MonoBehaviour:
     ValueDuration: 1
     map: {fileID: 4996540474504604181}
   - AnimationType: 0
-    startColor: {r: 0.10980393, g: 0.43137258, b: 0.17254902, a: 1}
-    EndColor: {r: 0.41456097, g: 0.43137255, b: 0.10980392, a: 0}
+    startColor: {r: 0.10980393, g: 0.43137258, b: 0.1764706, a: 1}
+    EndColor: {r: 0.33924034, g: 0.43137255, b: 0.10980392, a: 0}
     StartHue: 0
     StartSaturation: 0
     StartValue: 0
@@ -6151,13 +6136,13 @@ MonoBehaviour:
     ChangedHue: 0
     ChangedSaturation: 0
     ChangedValue: 0
-    Hueduration: 0
-    SaturationDuration: 0
-    ValueDuration: 0
+    Hueduration: 1
+    SaturationDuration: 1
+    ValueDuration: 1
     map: {fileID: 7175064018886163502}
   - AnimationType: 0
     startColor: {r: 0.41176474, g: 0.30588236, b: 0.10980393, a: 1}
-    EndColor: {r: 0.4117647, g: 0.18637379, b: 0.109803915, a: 0}
+    EndColor: {r: 0.4117647, g: 0.20486659, b: 0.109803915, a: 0}
     StartHue: 0
     StartSaturation: 0
     StartValue: 0
@@ -6167,13 +6152,13 @@ MonoBehaviour:
     ChangedHue: 0
     ChangedSaturation: 0
     ChangedValue: 0
-    Hueduration: 0
-    SaturationDuration: 0
-    ValueDuration: 0
+    Hueduration: 1
+    SaturationDuration: 1
+    ValueDuration: 1
     map: {fileID: 2309314901376702460}
   - AnimationType: 0
-    startColor: {r: 0.41176474, g: 0.30588236, b: 0.10980393, a: 1}
-    EndColor: {r: 0.4117647, g: 0.18637379, b: 0.109803915, a: 0}
+    startColor: {r: 0.10980393, g: 0.40784317, b: 0.40784317, a: 1}
+    EndColor: {r: 0.10980391, g: 0.2840591, b: 0.40784314, a: 0}
     StartHue: 0
     StartSaturation: 0
     StartValue: 0
@@ -6183,10 +6168,26 @@ MonoBehaviour:
     ChangedHue: 0
     ChangedSaturation: 0
     ChangedValue: 0
-    Hueduration: 0
-    SaturationDuration: 0
-    ValueDuration: 0
-    map: {fileID: 2309314901376702460}
+    Hueduration: 1
+    SaturationDuration: 1
+    ValueDuration: 1
+    map: {fileID: 7252991719921898856}
+  - AnimationType: 0
+    startColor: {r: 0.54901963, g: 0.10980393, b: 0.16078432, a: 1}
+    EndColor: {r: 0.54901963, g: 0.10980392, b: 0.4492141, a: 0}
+    StartHue: 0
+    StartSaturation: 0
+    StartValue: 0
+    TargetHue: 0
+    TargetSaturation: 0
+    TargetValue: 0
+    ChangedHue: 0
+    ChangedSaturation: 0
+    ChangedValue: 0
+    Hueduration: 1
+    SaturationDuration: 1
+    ValueDuration: 1
+    map: {fileID: 4996540474504604181}
 --- !u!483693784 &6027951806733006958
 TilemapRenderer:
   m_ObjectHideFlags: 0
