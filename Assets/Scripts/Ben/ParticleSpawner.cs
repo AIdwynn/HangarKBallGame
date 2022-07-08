@@ -107,6 +107,13 @@ public class ParticleSpawner
         return this;
     }
 
+    public ParticleSpawner ChangeEmissionAmount(short minAmount, short MaxAmount)
+    {
+        ParticleManager.Instance.SetOutPutAmount(_currentSystem, minAmount, MaxAmount);
+
+        return this;
+    }
+
 
 
 }
