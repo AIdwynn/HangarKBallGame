@@ -147,9 +147,12 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     {
         yield return new WaitForSeconds(time);
 
-        var main = ParticleSystem.main;
-        main.stopAction = ParticleSystemStopAction.Destroy;
-        ParticleSystem.Stop();
+        if (ParticleSystem != null)
+        {
+            var main = ParticleSystem.main;
+            main.stopAction = ParticleSystemStopAction.Destroy;
+            ParticleSystem.Stop();
+        }
     }
 
 

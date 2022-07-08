@@ -77,13 +77,21 @@ public class ParticleTester : MonoBehaviour
         if (kekwbutton2)
         {
 
-            ConstantSystem.StopConstant();
-            kekwbutton2 = false;
+            StartCoroutine(StopParticle());
+
         }
 
 
         // Activate -> in case of constant particles, will child itself to passed in object. 
 
+    }
+
+    IEnumerator StopParticle()
+    {
+        yield return new WaitForSeconds(5);
+
+        ConstantSystem.StopConstant();
+        kekwbutton2 = false;
     }
 
 
