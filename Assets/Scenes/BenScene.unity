@@ -5020,7 +5020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!156049354 &721394412
 Grid:
   m_ObjectHideFlags: 0
@@ -14113,10 +14113,10 @@ MonoBehaviour:
     Hueduration: 0
     SaturationDuration: 0
     ValueDuration: 0
-    map: {fileID: 2793838857586679844}
+    map: {fileID: 0}
   - AnimationType: 0
-    startColor: {r: 0.19932991, g: 0.31132078, b: 0.19530974, a: 1}
-    EndColor: {r: 0.8962264, g: 0.114142045, b: 0.58145225, a: 0}
+    startColor: {r: 0, g: 0, b: 0, a: 0}
+    EndColor: {r: 0, g: 0, b: 0, a: 0}
     StartHue: 0
     StartSaturation: 0
     StartValue: 0
@@ -14126,42 +14126,10 @@ MonoBehaviour:
     ChangedHue: 0
     ChangedSaturation: 0
     ChangedValue: 0
-    Hueduration: 1
-    SaturationDuration: 1
-    ValueDuration: 1
-    map: {fileID: 83047967}
-  - AnimationType: 1
-    startColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
-    EndColor: {r: 1, g: 0, b: 0, a: 1}
-    StartHue: 0
-    StartSaturation: 0
-    StartValue: 0
-    TargetHue: 0
-    TargetSaturation: 0
-    TargetValue: 0
-    ChangedHue: 0
-    ChangedSaturation: 0
-    ChangedValue: 0
-    Hueduration: 1
-    SaturationDuration: 1
-    ValueDuration: 1
-    map: {fileID: 7113598747520665285}
-  - AnimationType: 0
-    startColor: {r: 0, g: 1, b: 0.9897845, a: 0}
-    EndColor: {r: 1, g: 0, b: 0.05751419, a: 0}
-    StartHue: 0
-    StartSaturation: 0
-    StartValue: 0
-    TargetHue: 0
-    TargetSaturation: 0
-    TargetValue: 0
-    ChangedHue: 0
-    ChangedSaturation: 0
-    ChangedValue: 0
-    Hueduration: 1
-    SaturationDuration: 1
-    ValueDuration: 1
-    map: {fileID: 9001678696238307528}
+    Hueduration: 0
+    SaturationDuration: 0
+    ValueDuration: 0
+    map: {fileID: 0}
 --- !u!483693784 &1653051057388446820
 TilemapRenderer:
   m_ObjectHideFlags: 0
