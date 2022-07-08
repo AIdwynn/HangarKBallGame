@@ -16,19 +16,19 @@ public class AudioManager
     private AudioClip _boopSound;
     private AudioSource _boopSource;
     private AudioSource _musicSource;
-    private TileMapManager _tileMapManager;
+    private Gameloop _gameloop;
     private float _slowAmount;
     private float _timeModifier =1; 
     private float _counter;
 
-    public AudioManager(AudioClip beepSound, AudioClip boopSound, AudioSource boopSource, SongNames songName, MusicData musicData, AudioSource musicSource, TileMapManager tileMapManager, float slowAmount, int boopMoment)
+    public AudioManager(AudioClip beepSound, AudioClip boopSound, AudioSource boopSource, SongNames songName, MusicData musicData, AudioSource musicSource, Gameloop gameloop, float slowAmount, int boopMoment)
     {
         _beepSound = beepSound;
         _boopSound = boopSound;
         _boopSource = boopSource;
         _musicSource = musicSource;
         _musicSource.loop = true;
-        _tileMapManager = tileMapManager;
+        _gameloop = gameloop;
         _slowAmount = slowAmount;
         _data = musicData;
         _boopMoment = boopMoment;
@@ -49,7 +49,7 @@ public class AudioManager
                 Debug.Log(_bPM);
             }
         }
-        _tileMapManager.ChangeSpeed(_bPM/_boopMoment);
+        BPMChange();
         _musicSource.clip = _song;
         _musicSource.Play();
     }
@@ -85,6 +85,12 @@ public class AudioManager
         _musicSource.pitch = Mathf.Lerp(_musicSource.pitch, _slowAmount, normalisedTimeScale);
         _boopSource.pitch = Mathf.Lerp(_musicSource.pitch, _slowAmount, normalisedTimeScale);
         _bPM = _startBPM * (1 / ((_musicSource.clip.length / _musicSource.pitch) / _musicSource.clip.length));
-        _tileMapManager.ChangeSpeed(_bPM/_boopMoment);
+        BPMChange();
+
+    }
+
+    private void BPMChange()
+    {
+        _gameloop.BPMChange(_bPM, _boopMoment);
     }
 }

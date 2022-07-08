@@ -500,22 +500,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3cade39b71636f42afc3edc43de2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitchIncrease: 0.5
-  _colors:
-  - {r: 0.6073122, g: 1, b: 0.3443396, a: 0}
-  - {r: 0.4009434, g: 1, b: 0.8250199, a: 0}
-  - {r: 0.4198113, g: 0.4949056, b: 1, a: 5.38e-43}
-  - {r: 0.9705771, g: 0.3443396, b: 1, a: 0}
-  - {r: 1, g: 0.504717, b: 0.504717, a: 5.38e-43}
-  - {r: 1, g: 0.8229829, b: 0.5058824, a: 5.38e-43}
-  - {r: 0.80488193, g: 1, b: 0.5058824, a: 5.38e-43}
+  mongolen: 1
+  _pitchIncrease: 0.01
+  _maxTimeSlowAmount: 0.5
   _beepSound: {fileID: 8300000, guid: c4c9cf71b47edc64b90dc60cfb7fff72, type: 3}
   _boopSound: {fileID: 8300000, guid: ff992f4881f4493498561ca6d34e9f77, type: 3}
-  _songName: 0
-  _ballSpawners: []
-  _auidioSource: {fileID: 1304881616}
+  _startSongName: 0
+  _audioSource: {fileID: 0}
   _musicData: {fileID: 11400000, guid: fe7b0a2464d95db429cee9de7e30c302, type: 2}
   _musicSource: {fileID: 2113825478}
+  _tileMapManager: {fileID: 0}
+  _heads: []
   speedIncreaseBool: 0
 --- !u!1 &1952642967
 GameObject:
