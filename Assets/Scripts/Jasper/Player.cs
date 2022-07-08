@@ -44,6 +44,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _animDuration;
 
+    [SerializeField]
+    private float _shakeDuration;
+
     ParticleSpawner _ps;
 
     private void Start()
@@ -96,18 +99,6 @@ public class Player : MonoBehaviour
         //Debug.Log(Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized));
 
 
-        //WORKING ON THIS LATER TWEAK THIS
-        /*  if (Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized) <= -0.1f)
-          {
-
-              _ps = new ParticleSpawner(ParticleDirection.Constant, ParticleShape.Clouds).ChangeSize(0.4f, 0.8f).Activate(gameObject.transform).StopConstantAfterSeconds(0.5f);
-
-
-              Debug.Log("play");
-
-
-
-          }*/
 
         ParticleSpawn();
 
@@ -119,9 +110,26 @@ public class Player : MonoBehaviour
         // Debug.Log(TimeManager.TimeScaling.global);
     }
 
+    private void ParticleBreak()
+    {
+        //WORKING ON THIS LATER TWEAK THIS
+        if (Vector3.Dot(_rb.velocity.normalized, _inputVal.normalized) <= -0.1f)
+        {
+
+            _ps = new ParticleSpawner(ParticleDirection.Constant, ParticleShape.Clouds).ChangeSize(0.4f, 0.8f).Activate(gameObject.transform).StopConstantAfterSeconds(0.5f);
+
+
+            Debug.Log("play");
+
+
+
+        }
+    }
+
     private void ParticleSpawn()
     {
         ParticleHoverStandStill();
+        ParticleBreak();
     }
 
     private void ParticleHoverStandStill()
@@ -158,6 +166,9 @@ public class Player : MonoBehaviour
             _rb.AddForce(_reflector.transform.transform.right * (_playerPushbackForce / 2) * _rb.velocity.magnitude, ForceMode2D.Impulse);
 
         }
+
+
+        //transform.DOShakePosition(_shakeDuration, _reflector.transform.transform.right * 0.5f, 1, 0, false, true);
 
     }
 
