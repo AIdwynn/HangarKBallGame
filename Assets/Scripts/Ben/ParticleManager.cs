@@ -1,6 +1,5 @@
 using DAE.Gamesystem.Singleton;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -127,15 +126,16 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     //Call on update
     public void PlayConstantParticleSystem(ParticleSystem ParticleSystem, Transform PlayLocation)
     {
+        ParticleSystem.transform.position = PlayLocation.position;
         ParticleSystem.transform.parent = PlayLocation;
 
         ParticleSystem.Play();
     }
     public void StopConstantParticleSystem(ParticleSystem ParticleSystem)
     {
+        var main = ParticleSystem.main;
+        main.stopAction = ParticleSystemStopAction.Destroy;
         ParticleSystem.Stop();
-        Destroy(ParticleSystem.gameObject);
-
     }
     public void StopConstantParticleSystemAfterSeconds(ParticleSystem ParticleSystem, float time)
     {
@@ -145,8 +145,12 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     {
         yield return new WaitForSeconds(time);
 
-        ParticleSystem.Stop();
-        Destroy(ParticleSystem.gameObject);
+        if (ParticleSystem != null)
+        {
+            var main = ParticleSystem.main;
+            main.stopAction = ParticleSystemStopAction.Destroy;
+            ParticleSystem.Stop();
+        }
     }
 
 
@@ -230,6 +234,35 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
 
         main.startSizeMultiplier = mult;
     }
+
+
+    public void SetParticleRotationGradient(ParticleSystem ParticleSystem, float minRotation, float Maxrotation)
+    {
+        var main = ParticleSystem.main;
+
+        main.startRotation = new ParticleSystem.MinMaxCurve(minRotation, Maxrotation);
+    }
+
+    public void SetOutPutAmount(ParticleSystem ParticleSystem, short minAmount, short Maxamount)
+    {
+        var emission = ParticleSystem.emission;
+
+        if (emission.enabled)
+        {
+            if (emission.burstCount > 0)
+            {
+                emission.SetBurst(0, new ParticleSystem.Burst(0, minAmount, Maxamount));
+            }
+            else
+            {
+                emission.rateOverDistance = Random.Range(minAmount, Maxamount);
+            }
+        }
+
+
+
+    }
+
     public void SetMaterial(ParticleSystem particleSystem, ParticleShape shape)
     {
         switch (shape)
@@ -255,7 +288,7 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
             default:
                 break;
         }
-    }    
+    }
 
 }
 

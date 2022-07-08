@@ -60,7 +60,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b1ef2c6cc4bdfac498b6e3c389fde564, type: 3}
   - {fileID: 21300000, guid: b1ef2c6cc4bdfac498b6e3c389fde564, type: 3}
   - {fileID: 21300000, guid: b1ef2c6cc4bdfac498b6e3c389fde564, type: 3}
-  cirkleSprites: []
+  cirkleSprites:
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   triangleSprites:
   - {fileID: 3691511987390681858, guid: d6155a23cfe9c2a43b895559d1ee5521, type: 3}
   - {fileID: -6044066993975068668, guid: d6155a23cfe9c2a43b895559d1ee5521, type: 3}

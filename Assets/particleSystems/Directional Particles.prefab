@@ -1026,7 +1026,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
       cycleCount: 1
-      repeatInterval: 0.01
+      repeatInterval: 1
       probability: 1
   SizeModule:
     enabled: 1
@@ -4841,7 +4841,7 @@ ParticleSystemRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_RenderMode: 0
-  m_SortMode: 0
+  m_SortMode: 2
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0

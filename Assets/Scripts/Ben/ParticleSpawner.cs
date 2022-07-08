@@ -29,15 +29,20 @@ public class ParticleSpawner
 
     public ParticleSpawner StopConstantAfterSeconds(float time)
     {
-        
-        ParticleManager.Instance.StopConstantParticleSystemAfterSeconds(_currentSystem, time);
+        if (_currentSystem != null)
+        {
+            ParticleManager.Instance.StopConstantParticleSystemAfterSeconds(_currentSystem, time);
+        }
 
         return this;
-    }   
+    }
 
     public ParticleSpawner StopConstant()
     {
-        ParticleManager.Instance.StopConstantParticleSystem(_currentSystem);
+        if (_currentSystem != null)
+        {
+            ParticleManager.Instance.StopConstantParticleSystem(_currentSystem);
+        }
 
         return this;
     }
@@ -63,9 +68,20 @@ public class ParticleSpawner
         return this;
     }
 
-    public ParticleSpawner Rotate(float Zrotation)
+    public ParticleSpawner RotateCompleteParticleSystem(float Zrotation)
     {
         ParticleManager.Instance.RotateParticleSystemZ(_currentSystem, Zrotation);
+
+        return this;
+    }
+
+    public ParticleSpawner RotateIndividualParticles(bool Yes)
+    {
+        if (Yes)
+            ParticleManager.Instance.SetParticleRotationGradient(_currentSystem, 0, 360);
+        else
+            ParticleManager.Instance.SetParticleRotationGradient(_currentSystem, 0, 0);
+
 
         return this;
     }
@@ -87,6 +103,13 @@ public class ParticleSpawner
     public ParticleSpawner ChangeSize(float minSize, float maxSzie)
     {
         ParticleManager.Instance.SetParticleSize(_currentSystem, minSize, maxSzie);
+
+        return this;
+    }
+
+    public ParticleSpawner ChangeEmissionAmount(short minAmount, short MaxAmount)
+    {
+        ParticleManager.Instance.SetOutPutAmount(_currentSystem, minAmount, MaxAmount);
 
         return this;
     }
