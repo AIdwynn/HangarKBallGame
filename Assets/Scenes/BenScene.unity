@@ -152,7 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb03b607e7783a499ab63ce54149b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestHandleLocation: {fileID: 1474313610}
+  TestHandleLocation: {fileID: 791602327}
+  kekwbutton1: 0
+  kekwbutton2: 0
 --- !u!4 &3344720
 Transform:
   m_ObjectHideFlags: 0
